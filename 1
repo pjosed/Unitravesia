@@ -1,0 +1,119 @@
+PImage menu, piso, escenario;
+int xmenu = 0, ymenu = 0; // Posicion en x y de la imagen menú
+boolean escena0 = true, escena1 = false, manual = false, creditos = false;
+float xpos, ypos;
+boolean izquierda = false, derecha = false;
+float speed = 5;
+float suelo = 300; // Posición del suelo
+float gravedad = 2; // Gravedad constante
+float saltoVelocidad = 75; // Velocidad inicial del salto
+int gatoposx=600, gatoposy=300;
+
+
+void setup() {
+  size(1200, 600);
+  menu = loadImage("menu.png");
+  menu.resize(1200, 600);
+  image(menu, xmenu, ymenu);
+  
+}
+
+void draw() {
+  if (escena1) { // Si está en la escena del videojuego
+    escena1();
+  } else if(manual){ // Si se muestra el manual
+    manual();
+  } else if (creditos){ // Se muestran los creditos
+    creditos();
+  }
+}
+
+void mousePressed() {
+  if (escena0) { // Si está en la escena del menú
+    if (mouseX > 435 && mouseX < 786 && mouseY > 175 && mouseY < 242) {
+      escena0 = false;
+      escena1 = true;
+    } else if (mouseX > 435 && mouseX < 786 && mouseY > 276 && mouseY < 346) {
+      escena0 = false;
+      manual = true;
+    } else if (mouseX > 435 && mouseX < 786 && mouseY > 377 && mouseY < 475) {
+      escena0 = false;
+      creditos = true;
+    }
+  }
+}
+
+void personajes(){
+  
+}
+
+void escena1() { ////////////////////////////////////////////////////////////// Escena del videojuego
+frameRate(24);
+  background(#FFFFFF);
+   escenario= loadImage("Escenario.jpg"); 
+   escenario.resize(1200,300);
+  image(escenario,0, 0 );
+  rect(0, suelo, 1200, 300);  
+  piso = loadImage("Suelo.png");
+  piso.resize(1200,300);
+  image(piso, 0, suelo);
+  rect(xpos, ypos+5, 20, 20);
+  fill(#345BB9);
+  ellipse(gatoposx, gatoposy, 40, 40);
+  fill(#27D631);
+
+  
+if (gatoposx < 0) {
+    gatoposx = width;
+  }
+  gatoposx -= 5;
+
+  // Movimiento horizontal
+  if (izquierda) {
+    xpos -= speed;
+  }
+  if (derecha) {
+    xpos += speed;
+  }
+
+  // Limitar laterales
+  xpos = constrain(xpos, 0, width - 20);
+
+  // Aplicar gravedad si no está en el suelo
+  if (ypos < suelo) {
+    ypos += gravedad;
+  }
+
+  // Evitar que se pase del suelo
+  if (ypos > suelo) {
+    ypos = suelo;
+  }
+}
+
+void manual(){ ////////////////////////////////////////////////////////////////// MANUAL
+  
+  
+}
+
+void creditos(){ /////////////////////////////////////////////////////////////// CREDITOS
+  
+  
+}
+
+void keyPressed() {
+  if (keyCode == 'A' || keyCode == 'a') {
+    izquierda = true;
+  } else if (keyCode == 'D' || keyCode == 'd') {
+    derecha = true;
+  } else if ((keyCode == 'W' || keyCode == 'w') && ypos == suelo) { // Saltar solo si está en el suelo
+    ypos -= saltoVelocidad;
+  }
+}
+
+void keyReleased() {
+  if (keyCode == 'A' || keyCode == 'a') {
+    izquierda = false;
+  } else if (keyCode == 'D' || keyCode == 'd') {
+    derecha = false;
+  }
+}
