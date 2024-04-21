@@ -14,11 +14,11 @@ PImage personaje[]= new PImage[3];
 String a= "";
 String b= "";
 int sz2=40;
-int cl1=int(random(256));
-int cl2=int(random(256)); 
-int cl3=int(random(256));
-
-
+int cl1=int(random(256)); // color r
+int cl2=int(random(256)); // color g
+int cl3=int(random(256)); // color b
+PImage atras;
+PImage credits;
 
 void setup() {
   size(1200, 600);  
@@ -27,8 +27,20 @@ void setup() {
 
 void draw() {
   
-  if(escena0){
-    sz2=sz2+15;
+  if(escena0){ // Si está en el menú
+  escena0();    
+  }else if (escena1) { // Si está en la escena del videojuego
+    escena1();
+  } else if(personajes){ // Si está en la seleccion del personaje
+   personajes();
+  }else if(manual){ // Si se muestra el manual
+    manual();
+  } else if (creditos){ // Se muestran los creditos
+    creditos();
+  }
+}
+void escena0(){
+  sz2=sz2+15;
     cl1=cl1+10;
     cl2=cl2+10;
     cl3=cl3+10;
@@ -65,15 +77,6 @@ void draw() {
    textSize(100);
    text(b, sz2, height/2);
    
-  }else if (escena1) { // Si está en la escena del videojuego
-    escena1();
-  } else if(personajes){
-   personajes();
-  }else if(manual){ // Si se muestra el manual
-    manual();
-  } else if (creditos){ // Se muestran los creditos
-    creditos();
-  }
 }
 
 void mousePressed() {
@@ -88,6 +91,32 @@ void mousePressed() {
     } else if (mouseX > 800 && mouseX < 1200 && mouseY > 0 && mouseY < 100) {
       escena0 = false;
       creditos = true;
+    }
+  }
+  if (personajes){ // SI ESTOY SELECCIONANDO PERSONAJES
+    if(mouseX>34 & mouseX<124 & mouseY>50 & mouseY<290){ // SELECCIONAR PERSONAJE DE JOSE
+      personajes= false;
+      escena1=true;
+      
+    } else if(mouseX>420 & mouseX<519 & mouseY>50 & mouseY<290){ // SELECCIONAR PERSONAJE DE ALEXANDER
+      personajes= false;
+      escena1=true;
+      
+    }else if(mouseX>806 & mouseX<918 & mouseY>50 & mouseY<290){ // SELECCIONAR PERSONAJE DE SERGIO
+      personajes= false;
+      escena1=true;
+      
+    }else if(mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61){ // SELECCIONAR PERSONAJE DE SERGIO
+      personajes= false;
+      escena0=true;
+      
+    }
+    println("X ES:",mouseX);
+    println("Y ES:",mouseY);
+  } if (creditos){
+    if(mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61){ // SELECCIONAR PERSONAJE DE SERGIO
+      creditos= false;
+      escena0=true;
     }
   }
 }
@@ -121,6 +150,9 @@ void personajes(){
   text(a, 400, 440);
   textSize(34);
   fill(cl1, cl2, cl3);
+  atras = loadImage("atras.png");
+  atras.resize(50,50);
+  image(atras,1100,10);
 
   
 }
@@ -174,11 +206,18 @@ void manual(){ /////////////////////////////////////////////////////////////////
 }
 
 void creditos(){ /////////////////////////////////////////////////////////////// CREDITOS
-  
+  credits = loadImage("creditos.png");
+  credits.resize(width, height);
+  image(credits, 0, 0);
+  atras = loadImage("atras.png");
+  atras.resize(50,50);
+  image(atras,1100,10);
   
 }
 
 void keyPressed() {
+  
+  if(escena1){
   if (keyCode == 'A' || keyCode == 'a') {
     izquierda = true;
   } else if (keyCode == 'D' || keyCode == 'd') {
@@ -187,11 +226,13 @@ void keyPressed() {
     ypos -= saltoVelocidad;
   }
 }
-
+}
 void keyReleased() {
+  if(escena1){
   if (keyCode == 'A' || keyCode == 'a') {
     izquierda = false;
   } else if (keyCode == 'D' || keyCode == 'd') {
     derecha = false;
+  }
   }
 }
