@@ -1,0 +1,95 @@
+int xpers = 0;
+int ypers = 300;
+int speed = 5;
+int suelo = 300;
+int grav = 5;
+int tiempot=0;//este es el contador del tiempo
+int tiempoInicial;//esta variable es para lo saber cuando empieza el juego
+int tiempoult;//esta variable es para validar cuando se aumenta la velocidad
+boolean escena1=true;//este es el boleano de la escena del juego, cuando esto es verdadero, el contador de los segundos arranca
+boolean escenafinal=false;//esto es boleano de la escena final que será verdadero cuando pasen 60 segundos
+boolean jumping = false;
+boolean rightKeyPressed = false;
+boolean leftKeyPressed = false;
+
+void setup() {
+  size(1200, 600);
+  background(100);
+  tiempoInicial = millis();
+}
+
+void draw() {
+  background(100);
+  personaje();
+  obstaculo();
+  movimiento();
+  if(escena1==true){
+    tiempo();
+  }
+  if(tiempoult==60){
+    escenafinal=true;
+    println(escenafinal);
+  }
+}
+
+void keyPressed() {
+  if (keyCode == RIGHT) {
+    rightKeyPressed = true;
+  } else if (keyCode == LEFT) {
+    leftKeyPressed = true;
+  } else if (key == ' ' && !jumping) {
+    jumping = true;
+    ypers -= 200; // Salto
+  }
+}
+
+void keyReleased() {
+  if (keyCode == RIGHT) {
+    rightKeyPressed = false;
+  } else if (keyCode == LEFT) {
+    leftKeyPressed = false;
+  }
+}
+
+void movimiento() {
+  // Movimiento horizontal
+  if (rightKeyPressed==true) {
+    xpers = xpers+ speed;
+  } else if (leftKeyPressed) {
+    xpers = xpers-speed;
+  }
+  
+  // Aplicar gravedad
+  if (ypers < suelo) {
+    ypers =ypers+ grav;
+  } else {
+    ypers = suelo; // Asegurar que el personaje no atraviese el suelo
+    jumping = false; // Detener el salto cuando toca el suelo
+  }
+  
+  // Limitar la posición del personaje dentro del área de dibujo
+  xpers = constrain(xpers, 0, width - 40);
+}
+
+void personaje() {
+  fill(125);
+  rect(xpers, ypers - 100, 40, 100);
+}
+
+void obstaculo() {
+  fill(125);
+  rect((width / 2) - 100, suelo - 60, 100, 60);
+}
+void tiempo(){
+  tiempot = (millis() - tiempoInicial) / 1000;//millis da el tiempo en milisegundos, entonces debemos pasarlo a segundos restando el tiempo actual menos el inicial y dividir entre 1000
+  // Muestra el tiempo transcurrido en segundos
+  textSize(0);
+  text("Tiempo: " + tiempot + " segundos", 40, 40);
+  //aquí en este condicional si el tiempo actual al dividirlo entre 15, ver su rediduo y si se acerca a 0, entonces aumentamos nuestras variables de gravedad y velocidad.
+  //además, actualizamos el último tiempo donde cambiamos la velocidad porque trabajamos con datos aproximados y debemos restringir más lo que entra al sí.
+  if (tiempot % 15 < 0.1 && tiempoult!=tiempot){
+    grav=grav+1;
+    speed=speed+1;
+    tiempoult=tiempot;
+  }
+}
