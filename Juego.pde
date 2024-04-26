@@ -5,7 +5,7 @@ void escena1() { ////////////////////////////////////////////////////////////// 
   escprincipal.resize(width, 400);
   background(#FFFFFF);   
   image(escprincipal, 0, 0 ); //Escenario
-  piso = loadImage(""); // Piso
+  piso = loadImage("data/Suelo.png"); // Piso
   piso.resize(1200, 400); // Piso
   image(piso, 0, suelo+50); // Piso
   
