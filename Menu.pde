@@ -82,6 +82,9 @@ void escenario () { /////////////////////////////////////////// SELECCION DEL ES
   image(atras, 1100, 10);
 }
 void personajes() {
+  
+  float suelo  = 300; // Posición del suelo 
+  
   cl1=cl1+10;
   cl2=cl2+10;
   cl3=cl3+10;
@@ -101,10 +104,7 @@ void personajes() {
   personaje[0]= loadImage("jose.png");
   personaje[1]= loadImage("alexander.png");
   personaje[2]= loadImage("sergio.png");
- 
-  image(personaje[0], 0, 0);
-  image(personaje[1], width/3, 0);
-  image(personaje[2], width-width/3, 15);
+  
   piso = loadImage("Suelo.png");
   piso.resize(1200, 300);
   image(piso, 0, suelo);
@@ -114,6 +114,11 @@ void personajes() {
   atras = loadImage("atras.png");
   atras.resize(50, 50);
   image(atras, 1100, 10);
+ 
+  image(personaje[0], 0, 0);
+  image(personaje[1], width/3, 0);
+  image(personaje[2], width-width/3, 0);
+
 }
 
 void manual() { ////////////////////////////////////////////////////////////////// MANUAL
