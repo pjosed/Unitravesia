@@ -1,12 +1,14 @@
-void escena1( PImage Personaje, PImage Escenario) { ////////////////////////////////////////////////////////////// Escena del videojuego
 
-  float suelo = 450; // Posición del suelo
-  float xpos = 200, ypos=250;
+
+void escena1( PImage Personaje, PImage Escenario) { ////////////////////////////////////////////////////////////// Escena del videojuego
 
   int Width_Personaje_Principal = 50;
   int Height_Personaje_Principal = 200;
   Personaje.resize(Width_Personaje_Principal,Height_Personaje_Principal); 
   
+  
+  float suelo = 450; // Posición del suelo
+  float xpos = (width/2) - (Width_Personaje_Principal/2)  , ypos= suelo-Height_Personaje_Principal;
   
 
   Escenario.resize(width, 450);
@@ -17,11 +19,9 @@ void escena1( PImage Personaje, PImage Escenario) { ////////////////////////////
   image(piso, 0, suelo); // Piso
   
   
-  image(Personaje,xpos,suelo-Height_Personaje_Principal);  //Personaje
+  image(Personaje,xpos,  ypos );  //Personaje
   
-  
-  
-  
+
   
   /*
     if (escena1) {
@@ -38,15 +38,6 @@ void escena1( PImage Personaje, PImage Escenario) { ////////////////////////////
   
   
   */
-
- 
-
-
-
- 
- 
- 
- 
 }
   
   

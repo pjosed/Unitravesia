@@ -135,15 +135,25 @@ void mousePressed() {
 
 
 void keyPressed() {
+  
+   if (Escena1) {
+       
+       
+
+       
+
+      
+    }
+    
+  }
 
 
-}
 
 
 
 void keyReleased() {
   if (Escena1) {
-    if (keyCode == 'A' || keyCode == 'a') {
+    if (key == 'A' || keyCode == 'a') {
       izquierda = false;
     } else if (keyCode == 'D' || keyCode == 'd') {
       derecha = false;
