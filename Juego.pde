@@ -20,7 +20,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     
 
     
-    float VelocidadY = 0; // Velocidad inicial del dinosaurio en el eje y
+    float VelocidadY = 0; // Velocidad inicial del personaje en el eje y
   
 
     // Setter para la variable "personaje"
@@ -66,7 +66,10 @@ void draw (){
   /////// hasta aqui escenario y persona
 
   
- obstaculosEscena.draw();
+ obstaculosEscena.draw(xpos,Width_Personaje_Principal,ypos,Height_Personaje_Principal);
+ 
+ 
+
   
   
    
@@ -127,13 +130,28 @@ class Obstaculos {
 
   
   
-  void draw(){
+  void draw(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje){
     
     for (int i = obstaculos.size() - 1; i >= 0; i--) {
      
       
      this.obstaculos.get(i).display();
      this.obstaculos.get(i).update();
+     
+     
+    if (this.obstaculos.get(i).x < -16 /*  cambiar el 16 por el ancho del gato  */ ) { // Eliminar el obstaculo si sale de la pantalla 
+      this.obstaculos.remove(i);
+    }
+    
+    
+    
+     if (this.obstaculos.get(i).golpeaJugador( xPersonaje,  anchoPersonaje, yPersonaje,  altoPersoanje)) {
+      // Si el perosonaje  choca con un , detener el juego
+      textSize(32);
+      fill(255, 0, 0);
+      text("¡Juego terminado!", width/2 - 150, height/2);
+      noLoop();
+    }
       
     }
 
@@ -148,18 +166,10 @@ class Obstaculos {
     
    // this.obstaculos.get(i).display(); // Dibujar el obstaculo en la pantalla
     
-    /*if (obstaculo.golpeaJugador) {
-      // Si el dinosaurio choca con un cactus, detener el juego
-      textSize(32);
-      fill(255, 0, 0);
-      text("¡Juego terminado!", width/2 - 150, height/2);
-      noLoop();
-    }*/
+
     
     
-    /*if (obstaculos.get(i).x < -20) { // Eliminar el obstaculo si sale de la pantalla
-      obstaculos.remove(i);
-    }*/
+
     
     
     
@@ -167,6 +177,8 @@ class Obstaculos {
     this.rateNewObs = this.rateNewObs-1 ; 
     Gato gatico = new Gato(1200-30,450-30,10);
     this.obstaculos.add(gatico);
+    
+    
   
   }
     
@@ -234,6 +246,7 @@ class Iguana {
 class Gato implements Obstaculo {
   float x, y; // Posición del gato 
   float speed; // Velocidad de movimiento del gato
+  boolean golpeaJugador= false; 
 
   // Constructor de la clase gato
   Gato(float x, float y, float speed) {
@@ -253,7 +266,12 @@ class Gato implements Obstaculo {
     rect(x, y, 20, 30);
   }
 
-  // Método para verificar si el gato golpea al dinosaurio
+  // Método para verificar si el gato golpea al personaje
+  
+    boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje) {
+    // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
+    return (xPersonaje + anchoPersonaje > this.x && xPersonaje < x + 16 /* cabiar por el anho de la imagen del gato */ && yPersonaje + altoPersoanje > this.y);
+  }
 
 }
 
@@ -263,6 +281,11 @@ class Gato implements Obstaculo {
 interface Obstaculo {
     void display();
     void update();
+    boolean golpeaJugador(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje );
+    
+    float x = 0;
+    float y = 0;
+    
 }
 
 
