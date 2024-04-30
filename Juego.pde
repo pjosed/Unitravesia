@@ -34,6 +34,12 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     // Setter para la variable "escenario"
     void setEscenario(PImage escenario) {
         this.Escenario = escenario;
+        Escenario.resize(width, 450);
+          piso = loadImage("data/Suelo.png"); // Piso
+          piso.resize(1200, 400); // Piso
+          image(piso, 0, suelo); // Piso
+        
+
     }
 
 
@@ -42,12 +48,10 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
 void draw (){
 
-  Escenario.resize(width, 450);
-  background(#FFFFFF);   
+
+  
   image(Escenario, 0, 0 ); //Escenario
-  piso = loadImage("data/Suelo.png"); // Piso
-  piso.resize(1200, 400); // Piso
-  image(piso, 0, suelo); // Piso
+
   image(Personaje,xpos,  ypos );  //Personaje
   
   
@@ -81,16 +85,16 @@ void keyPressed() {
   
     if (keyCode == 'A' || keyCode == 'a') {
       izquierda = true;
-      xpos = xpos - 50;
+      xpos = xpos - 60;
       //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
     } else if (keyCode == 'D' || keyCode == 'd') {
       derecha = true;
-      xpos = xpos + 50;
+      xpos = xpos + 60;
       //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
     } 
     
     if (( key == 'W' || key =='w') && ypos == suelo - 200) {
-      VelocidadY = -50; // Impulso inicial hacia arriba para el salto
+      VelocidadY = -60; // Impulso inicial hacia arriba para el salto
   }
   
   
@@ -174,32 +178,31 @@ class Obstaculos {
     
     
    if (frameCount % rateNewObs == 0 ) {
+     
+     
     this.rateNewObs = this.rateNewObs-1 ; 
+    
+    
+    if ( int(random(2))  == 0 ){
+      
     Gato gatico = new Gato(1200-30,450-30,10);
     this.obstaculos.add(gatico);
+      
+    }else{
+      
+    Iguana iguana = new Iguana(1200-50,450-200,10);
+    this.obstaculos.add(iguana);
+      
+      
+    }
     
+
     
   
   }
     
   }
   
-  
-
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-
   }
 
  
@@ -227,13 +230,49 @@ class Obstaculos {
 
 
 
-class Iguana {
+class Iguana implements Obstaculo  {
+  float x, y; // Posición del gato 
+  float speed; // Velocidad de movimiento del gato
+  boolean golpeaJugador= false; 
+  PImage ImgIguanaArbol;
+
+
+  // Constructor de la clase gato
+  Iguana(float x, float y, float speed) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    
+    ImgIguanaArbol = loadImage("ObsIguana.png");
+    ImgIguanaArbol.resize(150,100); 
+    
+  }
+
+  // Método para actualizar la posición del gato
+  void update() {
+    x -= speed; // Mover el gato hacia la izquierda
+  }
+
+  void display() {
   
-  ArrayList<Object> obstaculos = new ArrayList<Object>();
+image(ImgIguanaArbol,x,  y); 
+    
+       
+    
+  }
+
+  // Método para verificar si el gato golpea al personaje
   
-  
-  
-  
+    boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje) {
+    // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
+    
+        //boolean r  = (xPersonaje + anchoPersonaje > this.x && xPersonaje < x + 16 /* cabiar por el anho de la imagen del gato */ && yPersonaje + altoPersoanje > this.y);
+    
+    return false;
+    
+
+    
+  }
  
 }
 
