@@ -16,7 +16,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     float ypos= suelo-Height_Personaje_Principal;
     
     
-     float ObastaculoNewRate = 60 ;
+     float ObastaculoNewRate = 50 ;
     
 
     
@@ -190,7 +190,7 @@ class Obstaculos {
       
     }else{
       
-    Iguana iguana = new Iguana(1200-50,450-200,10);
+    Iguana iguana = new Iguana(1200+400-400,450-511,10);
     this.obstaculos.add(iguana);
       
       
@@ -235,7 +235,9 @@ class Iguana implements Obstaculo  {
   float speed; // Velocidad de movimiento del gato
   boolean golpeaJugador= false; 
   PImage ImgIguanaArbol;
+  PImage popo;
 
+  float xpopo, ypopo; // Posición del gato 
 
   // Constructor de la clase gato
   Iguana(float x, float y, float speed) {
@@ -244,18 +246,27 @@ class Iguana implements Obstaculo  {
     this.speed = speed;
     
     ImgIguanaArbol = loadImage("ObsIguana.png");
-    ImgIguanaArbol.resize(150,100); 
+    ImgIguanaArbol.resize(400,511); 
+    
+    
+    popo = loadImage("popo.png");
+    popo.resize(41,32); 
     
   }
 
   // Método para actualizar la posición del gato
   void update() {
     x -= speed; // Mover el gato hacia la izquierda
+    xpopo -= speed;
+    ypopo += speed;
+    
   }
+
 
   void display() {
   
 image(ImgIguanaArbol,x,  y); 
+image(popo,x+180 , y+150); 
     
        
     
@@ -309,7 +320,7 @@ class Gato implements Obstaculo {
   
     boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje) {
     // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
-    return (xPersonaje + anchoPersonaje > this.x && xPersonaje < x + 16 /* cabiar por el anho de la imagen del gato */ && yPersonaje + altoPersoanje > this.y);
+    return (xPersonaje + anchoPersonaje > 15 + this.x && xPersonaje < x + 16 /* cabiar por el anho de la imagen del gato */ && yPersonaje + altoPersoanje > this.y);
   }
 
 }
