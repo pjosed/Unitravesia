@@ -17,6 +17,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     
     
      float ObastaculoNewRate = 50 ;
+
     
 
     
@@ -38,6 +39,9 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
           piso = loadImage("data/Suelo.png"); // Piso
           piso.resize(1200, 400); // Piso
           image(piso, 0, suelo); // Piso
+          
+    
+
         
 
     }
@@ -47,6 +51,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
 
 void draw (){
+  
+  
 
 
   
@@ -250,7 +256,7 @@ class Iguana implements Obstaculo  {
     
     
     popo = loadImage("popo.png");
-    popo.resize(41,32); 
+    popo.resize(30,22); 
     
   }
 
