@@ -1,10 +1,1 @@
-Class ModoJuego {
-  
-  
-  Draw 
-  
-  
-  
-  
-  
-}
+
