@@ -21,8 +21,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     
 
     
-    int startTime;
-    int elapsedTime;
+    int TiempoInicio;
+    int TiempoTranscurrido;
     
     float VelocidadY = 0; // Velocidad inicial del personaje en el eje y
   
@@ -40,7 +40,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
           piso = loadImage("data/Suelo.png"); // Piso
           piso.resize(1200, 400); // Piso
         
-          startTime = millis();
+          TiempoInicio = millis();
           
 
 
@@ -83,20 +83,20 @@ obstaculosEscena.draw(xpos,Width_Personaje_Principal,ypos,Height_Personaje_Princ
  
  
 
-  elapsedTime = millis() - startTime;
+  TiempoTranscurrido = millis() - TiempoInicio;
   
    
-  int seconds = int(elapsedTime / 1000.0);
+  int Segundos = int(TiempoTranscurrido / 1000.0);
   
   
 
   
-  int centiseconds = int((elapsedTime % 1000) / 10.0);
+  int centiSegundos = int((TiempoTranscurrido % 1000) / 10.0);
   textSize(40);
   fill(0);
   
-  String timeString = nf(seconds, 2) + ":" + nf(centiseconds, 2);
-  text(timeString, 10,35);
+  String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
+  text(TiempoParaMostrar, 10,35);
   
   
 
@@ -395,6 +395,7 @@ interface Obstaculo {
     float y = 0;
     
 }
+
 
 
 
