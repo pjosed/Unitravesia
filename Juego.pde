@@ -1,3 +1,5 @@
+import processing.svg.*;
+
 
 
 Obstaculos obstaculosEscena = new Obstaculos();
@@ -16,7 +18,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     float ypos= suelo-Height_Personaje_Principal;
     
     
-     float ObastaculoNewRate = 50 ;
+    
 
     
     int startTime;
@@ -28,9 +30,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     // Setter para la variable "personaje"
     void setPersonaje(PImage personaje) {
         this.Personaje = personaje;
-        this.Personaje.resize(this.Width_Personaje_Principal,this.Height_Personaje_Principal); 
-
-        
+        this.Personaje.resize(this.Width_Personaje_Principal,this.Height_Personaje_Principal);
     }
 
     // Setter para la variable "escenario"
@@ -41,10 +41,6 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
           piso.resize(1200, 400); // Piso
           image(piso, 0, suelo); // Piso
           startTime = millis();
-          
-    
-
-        
 
     }
 
@@ -54,8 +50,6 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
 void draw (){
 
-
-  
   image(Escenario, 0, 0 ); //Escenario
   
   
@@ -89,12 +83,20 @@ obstaculosEscena.draw(xpos,Width_Personaje_Principal,ypos,Height_Personaje_Princ
   
    
   int seconds = int(elapsedTime / 1000.0);
+  
+  
+
+  
   int centiseconds = int((elapsedTime % 1000) / 10.0);
   textSize(40);
   fill(0);
   
   String timeString = nf(seconds, 2) + ":" + nf(centiseconds, 2);
-  text(timeString, width / 2, height / 2);
+  text(timeString, 10,35);
+  
+  
+
+  
 }
 
 
@@ -176,24 +178,6 @@ class Obstaculos {
       
     }
 
-  // for (int i = obstaculos.size() - 1; i >= 0; i--) {
-     
-     
-    //obstaculos.get(i); Obtener un obstaculo de la lista
-    
-    
-    //obstaculos.get(i).update(); // Actualizar la posición del obstaculo
-    
-    
-   // this.obstaculos.get(i).display(); // Dibujar el obstaculo en la pantalla
-    
-
-    
-    
-
-    
-    
-    
    if (frameCount % rateNewObs == 0 ) {
      
      
@@ -206,14 +190,12 @@ class Obstaculos {
     this.obstaculos.add(gatico);
       
     }else{
-      
-   
-      
     Iguana iguana = new Iguana(1200+400-400,450-511,10);
-    this.obstaculos.add(iguana);
-      
-      
+    this.obstaculos.add(iguana); 
     }
+    
+    
+    
   }
     
   }
@@ -285,8 +267,7 @@ class Iguana implements Obstaculo  {
     
     
     
-    
-
+   
   }
 
 
