@@ -19,7 +19,7 @@ PImage credits;
 PImage escprincipal; // Escenario principal
 
 
-ArrayList<PImage> pprincipal; // PersonajesSeleccionados Principal
+ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
 
 Gif []corriendo;
 

@@ -39,8 +39,10 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         Escenario.resize(width, 450);
           piso = loadImage("data/Suelo.png"); // Piso
           piso.resize(1200, 400); // Piso
-          image(piso, 0, suelo); // Piso
+        
           startTime = millis();
+          
+
 
     }
 
@@ -49,9 +51,11 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
 
 void draw (){
+       
+background(255); 
 
-  image(Escenario, 0, 0 ); //Escenario
-  
+     image(Escenario, 0, 0 ); //Escenario
+     image(piso, 0, suelo); // Piso
   
 obstaculosEscena.draw(xpos,Width_Personaje_Principal,ypos,Height_Personaje_Principal);
 
