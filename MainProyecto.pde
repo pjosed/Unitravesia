@@ -3,12 +3,8 @@ PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
 PImage menu[] = new PImage [5];
 int xmenu = 0, ymenu = 0; // Posicion en x y de la imagen menú
-boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escenarios=false;
+boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false,Escenarios=false;
 boolean izquierda = false, derecha = false;
-float speed = 5;
-float gravedad = 2; // Gravedad constante
-float saltoVelocidad = 75; // Velocidad inicial del salto
-int gatoposx=600, gatoposy=300;
 PImage botones[]= new PImage[3];
 PImage personaje[]= new PImage[3];
 String a= "";
@@ -21,8 +17,17 @@ int cl3=int(random(256)); // color b
 PImage atras;
 PImage credits;
 PImage escprincipal; // Escenario principal
-PImage pprincipal; // personaje principal
+
+
+ArrayList<PImage> pprincipal; // PersonajesSeleccionados Principal
+
 Gif []corriendo;
+
+int CantJugadores = 0;
+int Seleccionados = 0;
+
+
+
 
 Escena_Juego E1 = new Escena_Juego();
 
@@ -50,6 +55,8 @@ void draw() {
     Escena_Manual();
   } else if (Creditos) { // Se muestran los creditos
     Escena_Creditos();
+  }else if (Escena_MultiOnly){
+  pregunta();
   }
 }
 
@@ -71,6 +78,8 @@ void mousePressed() {
       Creditos = true;
     }
   }
+  
+  
   if (Escenarios) { // SI ESTOY EN EL MENU ESCENARIOS
    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Escenarios= false;
@@ -78,49 +87,47 @@ void mousePressed() {
       escprincipal= escenario[1];
     }else if (mouseX>97 & mouseX<341 & mouseY>98 & mouseY<202) { // Escenario biblioteca
       Escenarios= false;
-      Personajes=true;
+      Escena_MultiOnly=true;
+      //Personajes=true;
       escprincipal= escenario[2];
     }else if (mouseX>473 & mouseX<714 & mouseY>299 & mouseY<401) { // Escenario Casa estudio
       Escenarios= false;
-      Personajes=true;
+      Escena_MultiOnly=true;
+      //Personajes=true;
       escprincipal= escenario[2];
     }else if (mouseX>800 & mouseX<1041 & mouseY>101 & mouseY<201) { // Escenario Bloque J
       Escenarios= false;
-      Personajes=true;
+      Escena_MultiOnly=true;
+      //Personajes=true;
       escprincipal= escenario[3];
     }
   
   }
-  if (Personajes) { // SI ESTOY SELECCIONANDO PERSONAJES
-    if (mouseX>34 & mouseX<124 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE JOSE
-      Personajes= false;
-      Escena1=true;
-      pprincipal=personaje[0];
-      
-      
-      E1.setPersonaje(pprincipal);
-      E1.setEscenario(escprincipal);
-      
-
-     
-    } else if (mouseX>420 & mouseX<519 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE ALEXANDER
-      Personajes= false;
-      Escena1=true;
-      pprincipal=personaje[1];
-      
-      E1.setPersonaje(pprincipal);
-      E1.setEscenario(escprincipal);
-    } else if (mouseX>806 & mouseX<918 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE SERGIO
-      Personajes= false;
-      Escena1=true;
-      pprincipal=personaje[2];
-      E1.setPersonaje(pprincipal);
-      E1.setEscenario(escprincipal);
-    } 
-    
-
   
+  
+  if (Personajes) { // SI ESTOY SELECCIONANDO PERSONAJES
+ 
+    if (mouseX>34 & mouseX<124 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE JOSE
+      pprincipal.add(personaje[0]);
+      Seleccionados +=1;
+    } else if (mouseX>420 & mouseX<519 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE ALEXANDER
+      pprincipal.add(personaje[1]);
+      Seleccionados +=1;
+
+    } else if (mouseX>806 & mouseX<918 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE SERGIO
+      pprincipal.add(personaje[2]);
+      Seleccionados +=1;
+    }
+    
+    if (Seleccionados == CantJugadores) {
+      Personajes= false;
+      Escena1=true;
+      E1.setEscenario(escprincipal);
+      E1.setPersonaje(pprincipal);
+    }
+    
   }
+
   if (Creditos) {
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Creditos= false;
@@ -143,6 +150,26 @@ void mousePressed() {
     println ("X ES: ", mouseX);
     println ("Y ES: ", mouseY);
   }
+  
+  
+  if(Escena_MultiOnly){ ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES 
+  
+    if (mouseX>476 & mouseX<689 & mouseY>100 & mouseY<137) { //////////// 1 JUGADOR
+      Escena_MultiOnly= false;
+      Personajes=true;
+      CantJugadores=1;
+    } else if (mouseX>466 & mouseX<723 & mouseY>263 & mouseY<308) { /////// 2 JUGADORES
+      Escena_MultiOnly = false;
+      Personajes=true;
+      CantJugadores=2;
+    } else if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
+      Escena_MultiOnly= false;
+      Escenarios=true;
+    }
+      
+  }
+  
+
 }
 
 

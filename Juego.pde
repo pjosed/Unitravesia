@@ -1,4 +1,4 @@
-import processing.svg.*;
+
 
 
 
@@ -28,8 +28,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
   
 
     // Setter para la variable "personaje"
-    void setPersonaje(PImage personaje) {
-        this.Personaje = personaje;
+    void setPersonaje(ArrayList<PImage> Personajes_Elegidos) {
+        this.Personaje = Personajes_Elegidos.get(0);
         this.Personaje.resize(this.Width_Personaje_Principal,this.Height_Personaje_Principal);
     }
 
@@ -368,7 +368,7 @@ class Gato implements Obstaculo {
     //line(0,yPersonaje + altoPersonaje-20, 1200, yPersonaje + altoPersonaje-20);
     
     
-    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + 20    &&   yPersonaje + altoPersonaje > this.y)   ;
+    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
     
 
     
