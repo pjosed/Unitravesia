@@ -1,6 +1,4 @@
-
-
-
+float suelo = 450; // Posición del suelo
 
 Obstaculos obstaculosEscena = new Obstaculos();
 
@@ -8,29 +6,24 @@ Obstaculos obstaculosEscena = new Obstaculos();
 
 
 class Escena_Juego { ////////////////////////////////////////////////////////////// Escena del videojuego
-    PImage Personaje;
+      
+    ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
+   
+    boolean pausa = false;
     PImage Escenario;
-
-    int Width_Personaje_Principal = 50;
-    int Height_Personaje_Principal = 200;
     float suelo = 450; // Posición del suelo
-    float xpos = (width/2) - (Width_Personaje_Principal/2);
-    float ypos= suelo-Height_Personaje_Principal;
-    
-    
-    
 
-    
     int TiempoInicio;
     int TiempoTranscurrido;
-    
-    float VelocidadY = 0; // Velocidad inicial del personaje en el eje y
   
-
     // Setter para la variable "personaje"
     void setPersonaje(ArrayList<PImage> Personajes_Elegidos) {
-        this.Personaje = Personajes_Elegidos.get(0);
-        this.Personaje.resize(this.Width_Personaje_Principal,this.Height_Personaje_Principal);
+      
+      for(int k = 0; k< Personajes_Elegidos.size();k++ )
+      
+      Jugadores.add(new Jugador(Personajes_Elegidos.get(k),k)   );
+
+  
     }
 
     // Setter para la variable "escenario"
@@ -51,26 +44,23 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
 
 void draw (){
-       
-background(255); 
+  
+  if (pausa == false){
+  
+    background(255); 
 
      image(Escenario, 0, 0 ); //Escenario
      image(piso, 0, suelo); // Piso
   
-obstaculosEscena.draw(xpos,Width_Personaje_Principal,ypos,Height_Personaje_Principal);
+     obstaculosEscena.draw();
+     
+     for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
+     
+     obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
 
-  image(Personaje,xpos,  ypos );  //Personaje
-  
-  
-  ypos +=  VelocidadY;
-  VelocidadY += 7; // Gravedad
-  
- 
-  if (ypos > suelo - 200) {
-    ypos = suelo - 200;
-    VelocidadY = 0;
-  }
-  
+      Jugadores.get(j).draw();
+
+     }
   
   
   
@@ -97,34 +87,25 @@ obstaculosEscena.draw(xpos,Width_Personaje_Principal,ypos,Height_Personaje_Princ
   
   String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
   text(TiempoParaMostrar, 10,35);
-  
-  
 
-  
+  }
+       
+
 }
 
-
 void keyPressed() {
-  
-    if (keyCode == 'A' || keyCode == 'a') {
-      izquierda = true;
-      xpos = xpos - 60;
-      //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
-    } else if (keyCode == 'D' || keyCode == 'd') {
-      derecha = true;
-      xpos = xpos + 60;
-      //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
-    } 
-    
-    if (( key == 'W' || key =='w') && ypos == suelo - 200) {
-      VelocidadY = -60; // Impulso inicial hacia arriba para el salto
-  }
-  
-  
-    xpos = constrain(xpos, 0, width - Width_Personaje_Principal);
-    ypos = constrain(ypos, 0, suelo - Height_Personaje_Principal);
-    
-    }
+
+ for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
+
+      Jugadores.get(j).keyPressed();
+     }
+     
+  if (keyCode=='p' | keyCode=='P'){
+      this.pausa=! pausa;
+    }    
+
+}
+
 
 }
 
@@ -151,42 +132,26 @@ class Obstaculos {
   
   ArrayList<Obstaculo> obstaculos = new ArrayList<Obstaculo>();
   
-  float rateNewObs = 120;
+  float TasaNuevosObstaculos = 120;
   
    
 
   
   
-  void draw(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje){
+  void draw(){
     
     for (int i = obstaculos.size() - 1; i >= 0; i--) {
-     
-      
      this.obstaculos.get(i).display();
      this.obstaculos.get(i).update();
-     
-     
-    if (this.obstaculos.get(i).x < -16 /*  cambiar el 16 por el ancho del gato  */ ) { // Eliminar el obstaculo si sale de la pantalla 
+    if (this.obstaculos.get(i).x < -40 ) { // Eliminar el obstaculo si sale de la pantalla 
       this.obstaculos.remove(i);
     }
-    
-    
-    
-     if (this.obstaculos.get(i).golpeaJugador( xPersonaje,  anchoPersonaje, yPersonaje,  altoPersoanje)) {
-      // Si el perosonaje  choca con un , detener el juego
-      textSize(32);
-      fill(255, 0, 0);
-      text("¡Juego terminado!", width/2 - 150, height/2);
-      noLoop();
-    }
-      
     }
 
-   if (frameCount % rateNewObs == 0 ) {
+   if (frameCount % TasaNuevosObstaculos == 0 ) {
      
-     
-    this.rateNewObs = this.rateNewObs-1 ; 
-    
+
+    this.TasaNuevosObstaculos = this.TasaNuevosObstaculos-1 ; 
     
     if ( int(random(2))  == 0 ){
       
@@ -197,13 +162,29 @@ class Obstaculos {
     Iguana iguana = new Iguana(1200+400-400,450-511,10);
     this.obstaculos.add(iguana); 
     }
-    
-    
-    
   }
-    
   }
   
+ boolean  Chocaron(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje){
+   
+ for (int i = obstaculos.size() - 1; i >= 0; i--) {
+   
+if (this.obstaculos.get(i).golpeaJugador( xPersonaje,  anchoPersonaje, yPersonaje,  altoPersoanje)) {
+      // Si el perosonaje  choca con un , detener el juego
+      textSize(32);
+      fill(255, 0, 0);
+      text("¡Juego terminado!", width/2 - 150, height/2);
+      noLoop();
+      return true;
+    }
+    
+ }
+ 
+ return false ;
+ 
+ 
+ } 
+
   }
 
  
@@ -395,6 +376,97 @@ interface Obstaculo {
     float y = 0;
     
 }
+
+
+class Jugador {
+  
+   int control;
+
+    PImage Imagen;
+    int Width_Personaje_Principal = 50;
+    int Height_Personaje_Principal = 200;
+    
+    //Posicion del Personaje
+    float xpos = (width/2) - (Width_Personaje_Principal/2);
+    float ypos= suelo-Height_Personaje_Principal;
+    
+    float VelocidadY = 0; // Velocidad inicial del personaje en el eje y
+    
+    
+    Jugador(PImage Imagen, int controles){
+    
+    this.Imagen  = Imagen;
+    this.Imagen.resize(this.Width_Personaje_Principal,this.Height_Personaje_Principal);
+    this.control= controles;
+    
+    }
+    
+ void draw(){
+     image(this.Imagen,this.xpos,  this.ypos ); 
+     this.ypos +=  this.VelocidadY;
+     this.VelocidadY += 7; // Gravedad
+  
+ 
+  if (this.ypos > suelo - 200) {
+    this.ypos = suelo - 200;
+    this.VelocidadY = 0;
+  }
+    }
+    
+    void keyPressed() {
+      
+      
+      if(this.control == 0){
+      
+      if (keyCode == 'A' || keyCode == 'a') {
+      izquierda = true;
+      this.xpos = this.xpos - 60;
+      //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
+    } else if (keyCode == 'D' || keyCode == 'd') {
+      derecha = true;
+      this.xpos = this.xpos + 60;
+      //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
+    } 
+    
+    if (( key == 'W' || key =='w') && this.ypos == suelo - 200) {
+      this.VelocidadY = -60; // Impulso inicial hacia arriba para el salto
+  }
+  
+  
+
+    
+    }else{
+      if (keyCode == LEFT) {
+      izquierda = true;
+      this.xpos = this.xpos - 60;
+      //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
+    } else if (keyCode == RIGHT ) {
+      derecha = true;
+      this.xpos = this.xpos + 60;
+      //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
+    }
+    
+    if (( keyCode == UP ) && this.ypos == suelo - 200) {
+      this.VelocidadY = -60; // Impulso inicial hacia arriba para el salto
+  }
+    
+    }
+    
+    
+    this.xpos = constrain(this.xpos, 0, width - this.Width_Personaje_Principal);
+    this.ypos = constrain(this.ypos, 0, suelo - this.Height_Personaje_Principal);
+    
+    
+
+      
+      
+      }
+      
+      
+      
+      
+  
+    }
 
 
 
