@@ -5,6 +5,7 @@ Obstaculos obstaculosEscena = new Obstaculos();
 
 
 
+
 class Escena_Juego { ////////////////////////////////////////////////////////////// Escena del videojuego
       
     ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
@@ -471,7 +472,7 @@ class Jugador {
 
 
 
-class Vida {
+class Coin {
   float x, y; // Posición del gato 
   boolean TomaAgua= false; 
   PImage ImgAgua ;
@@ -481,13 +482,13 @@ class Vida {
   
 
   // Constructor de la clase gato
-  Vida(float AnchoVentana, float AltoVentana, float speed) {
+  Coin(float AnchoVentana, float AltoVentana, float speed) {
     this.x = AnchoVentana - anchoGato  ;
     this.y = AltoVentana - altoGato;
   
     
     
-    ImgAgua = loadImage("Gato.png");
+    ImgAgua = loadImage("Coin.png");
     ImgAgua.resize(anchoGato,altoGato); 
     
    
