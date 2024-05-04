@@ -152,8 +152,8 @@ void mousePressed() {
   }
    if(Manual){
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
-      Escena_MultiOnly= false;
-      Escenarios=true;
+      Manual=false;
+      Escena0=true;
     }
     
   }
