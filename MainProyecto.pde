@@ -17,6 +17,7 @@ int cl3=int(random(256)); // color b
 PImage atras;
 PImage credits;
 PImage escprincipal; // Escenario principal
+PImage manual;
 
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
@@ -149,6 +150,15 @@ void mousePressed() {
     println ("X ES: ", mouseX);
     println ("Y ES: ", mouseY);
   }
+   if(Manual){
+    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
+      Manual=false;
+      Escena0=true;
+    }
+    
+  }
+  
+ 
   
   
   if(Escena_MultiOnly){ ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES 
