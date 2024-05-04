@@ -20,6 +20,7 @@ PImage escprincipal; // Escenario principal
 PImage manual;
 
 
+
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
 
 Gif []corriendo;
@@ -37,6 +38,8 @@ Escena_Juego E1 = new Escena_Juego();
 
 void setup() {
   size(1200, 600);
+
+
 }
 
 

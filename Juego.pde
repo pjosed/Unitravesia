@@ -1,5 +1,6 @@
 float suelo = 450; // Posición del suelo
 
+
 Obstaculos obstaculosEscena = new Obstaculos();
 
 
@@ -9,17 +10,18 @@ Obstaculos obstaculosEscena = new Obstaculos();
 class Escena_Juego { ////////////////////////////////////////////////////////////// Escena del videojuego
       
     ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
-   
+    Coin coin;
+  
     boolean pausa = false;
     PImage Escenario;
     float suelo = 450; // Posición del suelo
-
+    
     int TiempoInicio;
     int TiempoTranscurrido;
   
     // Setter para la variable "personaje"
     void setPersonaje(ArrayList<PImage> Personajes_Elegidos) {
-      
+       this.coin =new Coin();
       for(int k = 0; k< Personajes_Elegidos.size();k++ )
       
       Jugadores.add(new Jugador(Personajes_Elegidos.get(k),k)   );
@@ -88,6 +90,10 @@ void draw (){
   
   String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
   text(TiempoParaMostrar, 10,35);
+  
+  
+  
+  this.coin.display();
 
   }
        
@@ -473,31 +479,33 @@ class Jugador {
 
 
 class Coin {
-  float x, y; // Posición del gato 
+  float x, y; // Posición del coin
   boolean TomaAgua= false; 
-  PImage ImgAgua ;
+PImage ImgAgua;
   
-  int anchoGato = 72;
-  int altoGato = 62;
+  int anchoCoin = 26;
+  int altoCoin= 47;
   
+     
 
-  // Constructor de la clase gato
-  Coin(float AnchoVentana, float AltoVentana, float speed) {
-    this.x = AnchoVentana - anchoGato  ;
-    this.y = AltoVentana - altoGato;
-  
-    
-    
-    ImgAgua = loadImage("Coin.png");
-    ImgAgua.resize(anchoGato,altoGato); 
-    
+
+  // Constructor de la clase Coin
+  Coin() {
+   /* this.x = AnchoVentana - anchoGato  ;
+    this.y = AltoVentana - altoGato;*/
+  this.ImgAgua=  loadImage("coin.png");
+
+    this.ImgAgua.resize(anchoCoin,altoCoin); 
+
    
   }
+  
+
 
   // Método para actualizar la posición del gato
-  void update() {
+  /*void update() {
     x -=0; // Mover el gato hacia la izquierda
-  }
+  }*/
 
   // Método para dibujar el gato en la pantalla
   void display() {
@@ -509,21 +517,21 @@ class Coin {
 
   // Método para verificar si el gato golpea al personaje
   
-    boolean TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
+    /*boolean TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
     // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
     
     //line(0, this.y, 1200, this.y);
     //line(0,yPersonaje + altoPersonaje-20, 1200, yPersonaje + altoPersonaje-20);
     
-    
-    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
+    return true;
+    /*return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;*/
     
 
     
     
     
     
-  }
+  
 
 }
 
