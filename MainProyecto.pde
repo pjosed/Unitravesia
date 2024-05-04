@@ -84,12 +84,11 @@ void mousePressed() {
    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Escenarios= false;
       Escena0=true;
-      escprincipal= escenario[1];
     }else if (mouseX>97 & mouseX<341 & mouseY>98 & mouseY<202) { // Escenario biblioteca
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
-      escprincipal= escenario[2];
+      escprincipal= escenario[1];
     }else if (mouseX>473 & mouseX<714 & mouseY>299 & mouseY<401) { // Escenario Casa estudio
       Escenarios= false;
       Escena_MultiOnly=true;
