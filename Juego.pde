@@ -520,26 +520,19 @@ PImage ImgAgua;
 
   // Método para verificar si el gato golpea al personaje
   
-    /*boolean TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
+/*   boolean TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
     // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
     
     //line(0, this.y, 1200, this.y);
     //line(0,yPersonaje + altoPersonaje-20, 1200, yPersonaje + altoPersonaje-20);
     
-    return true;
-    /*return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;*/
     
+    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje+10 < this.x + anchoCoin   &&   yPersonaje + altoPersonaje > this.y)   ;
+    
+}*/
 
-    
-    
-    
-    
-  
 
 }
-
-
-
 
   
   
