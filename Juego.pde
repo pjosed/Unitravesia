@@ -471,6 +471,63 @@ class Jugador {
 
 
 
+class Vida {
+  float x, y; // Posición del gato 
+  boolean TomaAgua= false; 
+  PImage ImgAgua ;
+  
+  int anchoGato = 72;
+  int altoGato = 62;
+  
+
+  // Constructor de la clase gato
+  Vida(float AnchoVentana, float AltoVentana, float speed) {
+    this.x = AnchoVentana - anchoGato  ;
+    this.y = AltoVentana - altoGato;
+  
+    
+    
+    ImgAgua = loadImage("Gato.png");
+    ImgAgua.resize(anchoGato,altoGato); 
+    
+   
+  }
+
+  // Método para actualizar la posición del gato
+  void update() {
+    x -=0; // Mover el gato hacia la izquierda
+  }
+
+  // Método para dibujar el gato en la pantalla
+  void display() {
+    
+      image(ImgAgua,x,  y); 
+      
+      
+  }
+
+  // Método para verificar si el gato golpea al personaje
+  
+    boolean TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
+    // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
+    
+    //line(0, this.y, 1200, this.y);
+    //line(0,yPersonaje + altoPersonaje-20, 1200, yPersonaje + altoPersonaje-20);
+    
+    
+    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
+    
+
+    
+    
+    
+    
+  }
+
+}
+
+
+
 
   
   
