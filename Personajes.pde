@@ -22,7 +22,7 @@ void Escena_Personajes() {
   personaje[1]= loadImage("alexander.png");
   personaje[2]= loadImage("sergio.png");
   
-  piso = loadImage("Suelo.png");
+  piso = loadImage("suelo11.png");
   piso.resize(1200, 300);
   image(piso, 0, suelo);
   text(a, 400, 440);
