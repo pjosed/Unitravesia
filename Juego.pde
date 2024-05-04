@@ -60,6 +60,7 @@ void draw (){
      for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
      
      obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
+     coin.TomoAgua(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
 
       Jugadores.get(j).draw();
 
@@ -71,9 +72,6 @@ void draw (){
   
     
 
-  
-
- 
  
 
   TiempoTranscurrido = millis() - TiempoInicio;
@@ -94,6 +92,8 @@ void draw (){
   
   
   this.coin.display();
+  text(this.coin.coinsRecaudadas, 1200-30,35);
+  
   
 
   }
@@ -486,6 +486,7 @@ PImage ImgAgua;
   
   int anchoCoin = 26;
   int altoCoin= 47;
+  int coinsRecaudadas = 0;
   
      
 
@@ -514,22 +515,26 @@ PImage ImgAgua;
   void display() {
     
       image(ImgAgua,x, 450-altoCoin); 
-      
-      
   }
 
   // Método para verificar si el gato golpea al personaje
-  
-/*   boolean TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
+     void TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
     // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
     
     //line(0, this.y, 1200, this.y);
     //line(0,yPersonaje + altoPersonaje-20, 1200, yPersonaje + altoPersonaje-20);
     
+    if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 < this.x + anchoCoin+10   &&   yPersonaje + altoPersonaje > this.y){
+        this.x=random(0,1200-anchoCoin);
+    this.coinsRecaudadas = this.coinsRecaudadas + 1;
+  
     
-    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje+10 < this.x + anchoCoin   &&   yPersonaje + altoPersonaje > this.y)   ;
+    }
     
-}*/
+ 
+
+    
+}
 
 
 }
