@@ -94,6 +94,7 @@ void draw (){
   
   
   this.coin.display();
+  
 
   }
        
@@ -302,7 +303,7 @@ if (moverPopo == false){
     boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
     // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
     
-         return (xPersonaje + anchoPersonaje - 20 >=   this.xpopo && xPersonaje < this.xpopo + AnchoPopo    &&  (this.ypopo < yPersonaje+altoPersonaje && this.ypopo+AltoPopo > yPersonaje)  )   ;
+         return (xPersonaje + anchoPersonaje - 20 >=   this.xpopo && xPersonaje+10 <= this.xpopo + AnchoPopo    &&  (this.ypopo < yPersonaje+altoPersonaje && this.ypopo+AltoPopo > yPersonaje)  )   ;
     
   }
  
@@ -495,7 +496,9 @@ PImage ImgAgua;
     this.y = AltoVentana - altoGato;*/
   this.ImgAgua=  loadImage("coin.png");
 
-    this.ImgAgua.resize(anchoCoin,altoCoin); 
+    this.ImgAgua.resize(anchoCoin,altoCoin);
+    
+    this.x=random(0,1200-anchoCoin);
 
    
   }
@@ -510,7 +513,7 @@ PImage ImgAgua;
   // Método para dibujar el gato en la pantalla
   void display() {
     
-      image(ImgAgua,x,  y); 
+      image(ImgAgua,x, 450-altoCoin); 
       
       
   }
