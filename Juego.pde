@@ -432,11 +432,11 @@ class Jugador {
       
       if (keyCode == 'A' || keyCode == 'a') {
       izquierda = true;
-      this.xpos = this.xpos - 60;
+      this.xpos = this.xpos - 40;
       //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
     } else if (keyCode == 'D' || keyCode == 'd') {
       derecha = true;
-      this.xpos = this.xpos + 60;
+      this.xpos = this.xpos + 40;
       //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
     } 
     
@@ -450,11 +450,11 @@ class Jugador {
     }else{
       if (keyCode == LEFT) {
       izquierda = true;
-      this.xpos = this.xpos - 60;
+      this.xpos = this.xpos - 40;
       //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
     } else if (keyCode == RIGHT ) {
       derecha = true;
-      this.xpos = this.xpos + 60;
+      this.xpos = this.xpos + 40;
       //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
     }
     
@@ -511,12 +511,8 @@ PImage ImgAgua;
   
 
 
-  // Método para actualizar la posición del gato
-  /*void update() {
-    x -=0; // Mover el gato hacia la izquierda
-  }*/
 
-  // Método para dibujar el gato en la pantalla
+  // Método para dibujar el agua en la pantalla
   void display() {
     
       image(ImgAgua,x, 450-altoCoin); 
@@ -526,16 +522,11 @@ PImage ImgAgua;
      void TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
 
     
-    if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 < this.x + anchoCoin   &&   yPersonaje + altoPersonaje > this.y){
+    if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 <= this.x + anchoCoin   &&   yPersonaje + altoPersonaje > this.y){
     this.x=random(0,1200-anchoCoin);
     this.coinsRecaudadas = this.coinsRecaudadas + 1;
-  
-    
     }
-    
- 
 
-    
 }
 
 
