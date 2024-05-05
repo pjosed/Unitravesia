@@ -1,4 +1,5 @@
 import gifAnimation.*;
+int speed=5;
 PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
 PImage menu[] = new PImage [5];
@@ -206,10 +207,8 @@ void keyPressed() {
 
 void keyReleased() {
   if (Escena1) {
-    if (key == 'A' || keyCode == 'a') {
-      izquierda = false;
-    } else if (keyCode == 'D' || keyCode == 'd') {
-      derecha = false;
+   if (Escena1) {
+       E1.keyReleased();
     }
   }
 }

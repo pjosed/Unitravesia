@@ -9,7 +9,9 @@ Obstaculos obstaculosEscena = new Obstaculos();
 
 
 class Escena_Juego { ////////////////////////////////////////////////////////////// Escena del videojuego
-      
+    PImage corazon;
+    int UlFoto=0;
+    int vidas=3;  
     ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
     Coin coin;
     PImage CountAguas;
@@ -20,6 +22,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     
     int TiempoInicio;
     int TiempoTranscurrido;
+    boolean  boleaColision;
   
     // Setter para la variable "personaje"
 
@@ -40,10 +43,11 @@ void draw (){
      obstaculosEscena.draw();
      
      for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
-     
-     obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
-
-
+     if(obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal)){
+       this.vidas=vidas-1;
+       this.UlFoto=frameCount;
+       boleaColision=true;
+     }
       Jugadores.get(j).draw();
 
      }
@@ -51,6 +55,18 @@ void draw (){
           for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador si tomo agua
      coin.TomoAgua(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
      }
+     
+     if(frameCount-this.UlFoto>=40){
+      boleaColision=false;
+    }
+      //aquí verá cuando se acaben las 3 vidas
+      if(this.vidas==0){
+      textSize(32);
+      fill(255, 0, 0);
+      text("¡Juego terminado!", width/2 - 150, height/2);
+      noLoop();
+      }
+    
   
   
   
@@ -75,6 +91,12 @@ void draw (){
   String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
   text(TiempoParaMostrar, 10,35);
   
+   
+   corazon.resize(50,40);
+   image(corazon,(width/2)-30,10);
+   textSize(40);
+   fill(0);
+   text(vidas,(width/2)+10,42);
 
 PFont mono;
 mono = createFont("PoetsenOne-Regular.ttf", 38);
@@ -100,12 +122,14 @@ textFont(mono);
 
   // Setter para la variable "escenario"
   void setEscenario(PImage escenario) {
-    this.Escenario = escenario;
-    Escenario.resize(width, 450);
-    piso = loadImage("data/Suelo.png"); // Piso
-    piso.resize(1200, 400); // Piso
+        this.Escenario = escenario;
+        Escenario.resize(width, 450);
+        text(vidas,1160,42);
+        piso = loadImage("data/Suelo.png"); // Piso
+        piso.resize(1200, 400); // Piso      
+        TiempoInicio = millis();
+        corazon=loadImage("corazon.png");
 
-    TiempoInicio = millis();
   }
 
 
@@ -125,6 +149,19 @@ textFont(mono);
       this.pausa=! pausa;
     }
   }
+ 
+  void keyReleased(){
+  for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
+
+      Jugadores.get(j).keyReleased();
+     }
+}
+  
+  
+  
+  
+  
+  
 }
 
 
@@ -360,78 +397,135 @@ interface Obstaculo {
 
 
 class Jugador {
+  
+   int control;
 
-  int control;
-
-  PImage Imagen;
-  int Width_Personaje_Principal = 50;
-  int Height_Personaje_Principal = 200;
-
-  //Posicion del Personaje
-  float xpos = (width/2) - (Width_Personaje_Principal/2);
-  float ypos= suelo-Height_Personaje_Principal;
-
-  float VelocidadY = 0; // Velocidad inicial del personaje en el eje y
-
-
-  Jugador(PImage Imagen, int controles) {
-
+    PImage Imagen;
+    int Width_Personaje_Principal = 50;
+    int Height_Personaje_Principal = 200;
+    int grav=10;
+    //para el sistema de movimiento
+    boolean jumping1 = false;
+    boolean rightKeyPressed1 = false;
+    boolean leftKeyPressed1 = false;
+    boolean jumping2 = false;
+    boolean rightKeyPressed2 = false;
+    boolean leftKeyPressed2 = false;
+    
+    //Posicion del Personaje
+    float xpos = (width/2) - (Width_Personaje_Principal/2);
+    float ypos= suelo-Height_Personaje_Principal;
+    
+    
+    
+    Jugador(PImage Imagen, int controles){
+    
     this.Imagen  = Imagen;
-    this.Imagen.resize(this.Width_Personaje_Principal, this.Height_Personaje_Principal);
+    this.Imagen.resize(this.Width_Personaje_Principal,this.Height_Personaje_Principal);
     this.control= controles;
-  }
-
-  void draw() {
-    image(this.Imagen, this.xpos, this.ypos );
-    this.ypos +=  this.VelocidadY;
-    this.VelocidadY += 7; // Gravedad
-
-
-    if (this.ypos > suelo - 200) {
-      this.ypos = suelo - 200;
-      this.VelocidadY = 0;
+    
     }
-  }
-
-  void keyPressed() {
-
-
-    if (this.control == 0) {
-
-      if (keyCode == 'A' || keyCode == 'a') {
-        izquierda = true;
-        this.xpos = this.xpos - 40;
-        //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
-      } else if (keyCode == 'D' || keyCode == 'd') {
-        derecha = true;
-        this.xpos = this.xpos + 40;
-        //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
+    //desde acá empieza
+    void movimiento1() {
+      // Movimiento horizontal
+      if (rightKeyPressed1==true) {
+        this.xpos = this.xpos+ speed;
+      } else if (leftKeyPressed1) {
+        this.xpos = this.xpos-speed;
       }
-
-      if (( key == 'W' || key =='w') && this.ypos == suelo - 200) {
-        this.VelocidadY = -60; // Impulso inicial hacia arriba para el salto
-      }
-    } else {
-      if (keyCode == LEFT) {
-        izquierda = true;
-        this.xpos = this.xpos - 40;
-        //Añadir que el personaje corra hacia la izquierda añadiendo el gif o imagen
-      } else if (keyCode == RIGHT ) {
-        derecha = true;
-        this.xpos = this.xpos + 40;
-        //Añadir que el personaje corra hacia la derecha añadiendo el gif o imagen
-      }
-
-      if (( keyCode == UP ) && this.ypos == suelo - 200) {
-        this.VelocidadY = -60; // Impulso inicial hacia arriba para el salto
+      
+      // Aplicar gravedad
+      if (this.ypos < suelo-Height_Personaje_Principal) {
+        this.ypos =this.ypos+ grav+40;
+      } else {
+        this.ypos = suelo-Height_Personaje_Principal; // Asegurar que el personaje no atraviese el suelo
+        jumping1 = false; // Detener el salto cuando toca el suelo
       }
     }
-
-
+    void movimiento2() {
+      // Movimiento horizontal
+      if (rightKeyPressed2==true) {
+        this.xpos = this.xpos+ speed;
+      } else if (leftKeyPressed2) {
+        this.xpos = this.xpos-speed;
+      }
+      
+      // Aplicar gravedad
+      if (this.ypos < suelo-Height_Personaje_Principal) {
+        this.ypos =this.ypos+ grav;
+      } else {
+        this.ypos = suelo-Height_Personaje_Principal; // Asegurar que el personaje no atraviese el suelo
+        jumping2 = false; // Detener el salto cuando toca el suelo
+      }
+    }
+    //acá termina la tortura
+ void draw(){
+     image(this.Imagen,this.xpos,  this.ypos ); 
+     if(this.control == 0){
+        movimiento1();
+      }else{
+        movimiento2();
+      }
+ 
+    }
+    
+    void keyPressed() {
+      
+      
+      if(this.control == 0){
+        
+        if (keyCode == 'd' || keyCode=='D') {
+      this.rightKeyPressed1 = true;
+    } else if (keyCode == 'a' || keyCode=='A') {
+      this.leftKeyPressed1 = true;
+    } else if (keyCode == 'w' || keyCode=='W' && !jumping1) {
+      this.jumping1 = true;
+      this.ypos -= 200; // Salto
+    }
+  
+    
+    }else{
+      if (keyCode == RIGHT) {
+        this.rightKeyPressed2 = true;
+      } else if (keyCode == LEFT) {
+        this.leftKeyPressed2 = true;
+      } else if (keyCode == UP && !jumping2) {
+        this.jumping2 = true;
+        this.ypos -= 200; // Salto
+      }
+    
+    }
+    
+    
     this.xpos = constrain(this.xpos, 0, width - this.Width_Personaje_Principal);
-    this.ypos = constrain(this.ypos, 0, suelo - this.Height_Personaje_Principal);
+    this.ypos = constrain(this.ypos, 0, suelo - this.Height_Personaje_Principal+30);
+    
+      }
+    void keyReleased() {
+      if(this.control == 0){
+        
+        if (keyCode == 'd' || keyCode=='D') {
+          this.rightKeyPressed1 = false;
+        } else if (keyCode == 'A' || keyCode=='a') {
+          this.leftKeyPressed1 = false;
+        }
+  
+    
+    }else{
+      if (keyCode == RIGHT) {
+          this.rightKeyPressed2 = false;
+        } else if (keyCode == LEFT) {
+          this.leftKeyPressed2 = false;
+        }
+    }
+      
+      
   }
-}
+      
+      
+      
+  
+    }
 
 
 
