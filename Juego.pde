@@ -69,9 +69,9 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         textSize(32);
         fill(255, 0, 0);
         text("¡GAME OVER! :(", width/2 - 150, height/2);
-         fill(0, 0, 0);
-        text("Para reiniciar oprime R", width/2 - 150, height/2+40);
-        text("Para Terminar K", width/2 - 150, height/2+30+40);
+         fill(255,255, 255);
+        text("Para reiniciar oprime R", width/2 - 150, suelo-30);
+        text("Para terminar oprime K", width/2 - 150, suelo);
         Escena1=false;
         Recovery = true;
         
