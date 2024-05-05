@@ -11,5 +11,4 @@ void pregunta(){ ///////////////////////////////////////////////////////PREGUNTA
   atras.resize(50, 50);
   image(atras, 1100, 10);
   
-  
 }
