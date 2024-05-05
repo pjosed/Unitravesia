@@ -15,7 +15,8 @@ void Escena_Personajes() {
     cl3=0;
   }
 
-  background(#FFFFFF);
+  fondo_menu=loadImage("azuldegradado.jpg");
+  image(fondo_menu, 0, 0, width, height);
   a= "Escoje con quien deseas jugar! :)";
 
   personaje[0]= loadImage("jose.png");
