@@ -21,6 +21,8 @@ PImage atras;
 PImage credits;
 PImage escprincipal; // Escenario principal
 PImage manual;
+PImage fondo_menu;
+PImage fondo2;
 boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false;
 
 
