@@ -215,12 +215,12 @@ void mousePressed() {
   
   if(Escena_MultiOnly){ ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES 
   
-    if (mouseX>476 & mouseX<689 & mouseY>100 & mouseY<137) { //////////// 1 JUGADOR
+    if (mouseX>401 & mouseX<798 & mouseY>137 & mouseY<229) { //////////// 1 JUGADOR
       Escena_MultiOnly= false;
       Personajes=true;
       CantJugadores=1;
       click();
-    } else if (mouseX>466 & mouseX<723 & mouseY>263 & mouseY<308) { /////// 2 JUGADORES
+    } else if (mouseX>400 & mouseX<800 & mouseY>298 & mouseY<400) { /////// 2 JUGADORES
       Escena_MultiOnly = false;
       Personajes=true;
       CantJugadores=2;
