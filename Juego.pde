@@ -43,18 +43,21 @@ void draw (){
      obstaculosEscena.draw();
      
      for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
+      coin.TomoAgua(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
      if(obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal,this.boleaColision)){
        this.vidas=vidas-1;
        this.UlFoto=frameCount;
        boleaColision=true;
      }
       Jugadores.get(j).draw();
+          
+
 
      }
-     
-          for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador si tomo agua
+
+          /*for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador si tomo agua
      coin.TomoAgua(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
-     }
+     }*/
      
      if(frameCount-this.UlFoto>=40){
       boleaColision=false;
@@ -91,6 +94,13 @@ void draw (){
   String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
   text(TiempoParaMostrar, 10,35);
   
+       
+  fill(255, 255, 255);
+  this.coin.display();
+  image(CountAguas,1200-112,15);/*47*/
+  text(nf(this.coin.coinsRecaudadas,2), 1200-112+50,45);
+     
+  
    
    corazon.resize(50,40);
    image(corazon,(width/2)-30,10);
@@ -102,10 +112,7 @@ PFont mono;
 mono = createFont("PoetsenOne-Regular.ttf", 38);
 textFont(mono);
 
- fill(255, 255, 255);
-  this.coin.display();
-  image(CountAguas,1200-112,15);/*47*/
-  text(nf(this.coin.coinsRecaudadas,2), 1200-112+50,45);
+
   
   /*if (this.coin.coinsRecaudadas%5 == 0 && this.coin.coinsRecaudadas!=0 ){
   this.vidas = this.vidas +1 ;
@@ -330,7 +337,7 @@ class Iguana implements Obstaculo {
     boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje, boolean boleaColision) {
    
          if(boleaColision==false){
-           return (xPersonaje + anchoPersonaje - 20 >=   this.xpopo && xPersonaje < this.xpopo + AnchoPopo    &&  (this.ypopo < yPersonaje+altoPersonaje && this.ypopo+AltoPopo > yPersonaje)  )   ;
+           return (xPersonaje + anchoPersonaje - 20 >=   this.xpopo && xPersonaje+20 < this.xpopo + AnchoPopo    &&  (this.ypopo < yPersonaje+altoPersonaje && this.ypopo+AltoPopo > yPersonaje)  )   ;
          }else{
            return false;
          }
@@ -469,6 +476,8 @@ class Jugador {
     }
     //acá termina la tortura
  void draw(){
+   
+     
      image(this.Imagen,this.xpos,  this.ypos ); 
      if(this.control == 0){
         movimiento1();
@@ -500,14 +509,14 @@ class Jugador {
         this.leftKeyPressed2 = true;
       } else if (keyCode == UP && !jumping2) {
         this.jumping2 = true;
-        this.ypos -= 400; // Salto
+        this.ypos -= 60; // Salto
       }
     
     }
     
     
     this.xpos = constrain(this.xpos, 0, width - this.Width_Personaje_Principal);
-    this.ypos = constrain(this.ypos, 0, suelo - this.Height_Personaje_Principal+30);
+    this.ypos = constrain(this.ypos, 0, suelo - this.Height_Personaje_Principal);
     
       }
     void keyReleased() {
@@ -528,7 +537,8 @@ class Jugador {
         }
     }
       
-      
+         this.xpos = constrain(this.xpos, 0, width - this.Width_Personaje_Principal);
+    this.ypos = constrain(this.ypos, 0, suelo - this.Height_Personaje_Principal);
   }
       
       
@@ -560,6 +570,7 @@ class Coin {
     this.ImgAgua.resize(anchoCoin, altoCoin);
 
     this.x=random(0, 1200-anchoCoin-75);
+    this.y=450-47;
   }
 
 
@@ -575,8 +586,8 @@ class Coin {
   void TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
 
 
-    if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 <= this.x + anchoCoin   &&   yPersonaje + altoPersonaje > this.y) {
-      this.x=random(0, 1200-anchoCoin);
+    if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 <= this.x + anchoCoin   &&   yPersonaje + altoPersonaje >= this.y) {
+      this.x=random(0, 1200-anchoCoin-30);
       this.coinsRecaudadas = this.coinsRecaudadas + 1;
     }
   }
