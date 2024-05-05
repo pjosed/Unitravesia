@@ -580,7 +580,7 @@ class Coin {
       this.coinsRecaudadas = this.coinsRecaudadas + 1;
       CoinRec=true;
       CoinPlaying=false;
-      if (coinsRecaudadas%5==0){
+      if (coinsRecaudadas%10==0){
         confirmar_vida=true;
       }
     }
