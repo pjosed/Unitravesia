@@ -8,6 +8,7 @@ PImage menu[] = new PImage [5];
 int xmenu = 0, ymenu = 0; // Posicion en x y de la imagen menú
 boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false,Escenarios=false;
 boolean izquierda = false, derecha = false;
+boolean confirmar_vida=false;
 PImage botones[]= new PImage[3];
 PImage personaje[]= new PImage[3];
 String a= "";
