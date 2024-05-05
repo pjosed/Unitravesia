@@ -1,6 +1,6 @@
 import gifAnimation.*;
 import processing.sound.*;
-SoundFile Menú, juego, coin, colision;
+SoundFile Menú, juego, coin, colision, click;
 int speed=10;
 PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
@@ -106,12 +106,16 @@ void mousePressed() {
     if (mouseX > 0 && mouseX < 400 && mouseY > 0 && mouseY < 100) {
       Escena0 = false;
       Escenarios = true;
+      click();
+      
     } else if (mouseX > 400 & mouseX < 800 && mouseY > 0 & mouseY < 100) {
       Escena0 = false;
       Manual = true;
+      click();
     } else if (mouseX > 800 && mouseX < 1200 & mouseY > 0 && mouseY < 100) {
       Escena0 = false;
       Creditos = true;
+      click();
     }
   }
   
@@ -120,21 +124,25 @@ void mousePressed() {
    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Escenarios= false;
       Escena0=true;
+      click();
     }else if (mouseX>97 & mouseX<341 & mouseY>98 & mouseY<202) { // Escenario biblioteca
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
       escprincipal= escenario[1];
+      click();
     }else if (mouseX>473 & mouseX<714 & mouseY>299 & mouseY<401) { // Escenario Casa estudio
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
       escprincipal= escenario[2];
+      click();
     }else if (mouseX>800 & mouseX<1041 & mouseY>101 & mouseY<201) { // Escenario Bloque J
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
       escprincipal= escenario[3];
+      click();
     }
   
   }
@@ -145,13 +153,20 @@ void mousePressed() {
     if (mouseX>34 & mouseX<124 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE JOSE
       pprincipal.add(personaje[0]);
       Seleccionados +=1;
+      click();
     } else if (mouseX>420 & mouseX<519 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE ALEXANDER
       pprincipal.add(personaje[1]);
       Seleccionados +=1;
+      click();
 
     } else if (mouseX>806 & mouseX<918 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE SERGIO
       pprincipal.add(personaje[2]);
       Seleccionados +=1;
+      click();
+    } else if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
+      Personajes= false;
+      Escena_MultiOnly=true;
+      click();
     }
     
     if (Seleccionados == CantJugadores) {
@@ -167,6 +182,7 @@ void mousePressed() {
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Creditos= false;
       Escena0=true;
+      click();
     } else if (mouseX>120 & mouseX<578 & mouseY>158 & mouseY<219) {
       link("https://www.alamy.es/puente-de-diversos-derechos-hombre-gente-saltando-stick-figura-stickman-pictograma-iconos-image214760025.html");
     } else if (mouseX>118 & mouseX<303 & mouseY>272 & mouseY<293) {
@@ -189,6 +205,7 @@ void mousePressed() {
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Manual=false;
       Escena0=true;
+      click();
     }
     
   }
@@ -202,13 +219,16 @@ void mousePressed() {
       Escena_MultiOnly= false;
       Personajes=true;
       CantJugadores=1;
+      click();
     } else if (mouseX>466 & mouseX<723 & mouseY>263 & mouseY<308) { /////// 2 JUGADORES
       Escena_MultiOnly = false;
       Personajes=true;
       CantJugadores=2;
+      click();
     } else if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Escena_MultiOnly= false;
       Escenarios=true;
+      click();
     }
       
   }
@@ -235,49 +255,5 @@ void keyReleased() {
    if (Escena1) {
        E1.keyReleased();
     }
-  }
-}
-
-void iniciarMusicaMenu() {
-  Menú = new SoundFile(this, "MenuCanción.mp3");
-  Menú.amp(0.3); // Volumen
-  Menú.rate(1); // Velocidad
-  Menú.loop();
-  MusicaPlaying = true;
-}
-
-void detenerMusicaMenu() {
-  if (MusicaPlaying) {
-    Menú.stop();
-    MusicaPlaying = false;
-  }
-}
-
-void iniciarMusicaJuego() {
-  if (juego == null) {
-    juego = new SoundFile(this, "MarioCanción.mp3");
-    juego.amp(0.3); // Volumen
-    juego.rate(1); // Velocidad
-    juego.loop();
-  }
-}
-
-void CoinRecogida() {
-  if(!CoinPlaying){
- coin = new SoundFile(this, "SonidoCoin.mp3");
- coin.amp(0.3); // Volumen
- coin.rate(1); // Velocidad
- coin.play();
- CoinPlaying=true;
-  }
-}
-
-void ColisionSonido() {
-  if(!ColisionPlaying){
- colision = new SoundFile(this, "SonidoExplosion.mp3");
- colision.amp(0.3); // Volumen
- colision.rate(1); // Velocidad
- colision.play();
- ColisionPlaying=true;
   }
 }
