@@ -11,6 +11,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       
     ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
     Coin coin;
+    PImage CountAguas;
   
     boolean pausa = false;
     PImage Escenario;
@@ -22,6 +23,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     // Setter para la variable "personaje"
     void setPersonaje(ArrayList<PImage> Personajes_Elegidos) {
        this.coin =new Coin();
+       this.CountAguas = loadImage("CountCoins.png");
       for(int k = 0; k< Personajes_Elegidos.size();k++ )
       
       Jugadores.add(new Jugador(Personajes_Elegidos.get(k),k)   );
@@ -89,14 +91,22 @@ void draw (){
   int centiSegundos = int((TiempoTranscurrido % 1000) / 10.0);
   textSize(40);
   fill(0);
-  
+   fill(255, 255, 255);
   String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
   text(TiempoParaMostrar, 10,35);
   
-  
-  
+
+PFont mono;
+mono = createFont("PoetsenOne-Regular.ttf", 38);
+textFont(mono);
+
+ fill(255, 255, 255);
   this.coin.display();
-  text(this.coin.coinsRecaudadas, 1200-30,35);
+  image(CountAguas,1200-112,15);/*47*/
+  text(nf(this.coin.coinsRecaudadas,2), 1200-112+50,45);
+
+
+
   
   
 

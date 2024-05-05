@@ -38,6 +38,9 @@ Escena_Juego E1 = new Escena_Juego();
 
 void setup() {
   size(1200, 600);
+PFont mono;
+mono = createFont("PoetsenOne-Regular.ttf", 38);
+textFont(mono);
 
 
 }
@@ -49,6 +52,9 @@ void draw() {
   if (Escena0) { // Si está en el menú
     Escena_Menu();
   } else if (Escena1) { // Si está en la escena del videojuego
+  PFont mono;
+mono = createFont("PoetsenOne-Regular.ttf", 38);
+textFont(mono);
      E1.draw(); 
   } else if (Escenarios) {
     Elegir_Escenario();
