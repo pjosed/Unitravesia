@@ -22,24 +22,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     int TiempoTranscurrido;
   
     // Setter para la variable "personaje"
-    void setPersonaje(ArrayList<PImage> Personajes_Elegidos) {
-       this.coin =new Coin();
-       this.CountAguas = loadImage("CountCoins.png");
-      for(int k = 0; k< Personajes_Elegidos.size();k++ )
-      
-      Jugadores.add(new Jugador(Personajes_Elegidos.get(k),k)   );
 
-  ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
-  Coin coin;
-
-  boolean pausa = false;
-  PImage Escenario;
-  float suelo = 450; // Posición del suelo
-
-  int TiempoInicio;
-  int TiempoTranscurrido;
-
-    }
 
 
 
@@ -103,12 +86,17 @@ textFont(mono);
   text(nf(this.coin.coinsRecaudadas,2), 1200-112+50,45);
 
 
-
-  
-  
-
-      Jugadores.add(new Jugador(Personajes_Elegidos.get(k), k)   );
   }
+}
+  
+  
+    void setPersonaje(ArrayList<PImage> Personajes_Elegidos) {
+       this.coin =new Coin();
+       this.CountAguas = loadImage("CountCoins.png");
+      for(int k = 0; k< Personajes_Elegidos.size();k++ )
+      
+      Jugadores.add(new Jugador(Personajes_Elegidos.get(k),k)   );
+    }
 
   // Setter para la variable "escenario"
   void setEscenario(PImage escenario) {
@@ -124,59 +112,7 @@ textFont(mono);
 
 
 
-  void draw () {
-
-    if (pausa == false) {
-
-      background(255);
-
-      image(Escenario, 0, 0 ); //Escenario
-      image(piso, 0, suelo); // Piso
-      CantAgua=loadImage("coin.png");
-      image(CantAgua, 1125, 0);
-      obstaculosEscena.draw();
-
-      for (int j =0; j < Jugadores.size(); j++) {//Preguntar por cada Jugador
-
-        obstaculosEscena.Chocaron(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal);
-
-
-        Jugadores.get(j).draw();
-      }
-
-      for (int j =0; j < Jugadores.size(); j++) {//Preguntar por cada Jugador si tomo agua
-        coin.TomoAgua(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal);
-      }
-
-
-
-      /////// hasta aqui escenario y persona
-
-
-
-
-
-      TiempoTranscurrido = millis() - TiempoInicio;
-
-
-      int Segundos = int(TiempoTranscurrido / 1000.0);
-
-
-
-
-      int centiSegundos = int((TiempoTranscurrido % 1000) / 10.0);
-      textSize(40);
-      fill(0);
-
-      String TiempoParaMostrar = nf(Segundos, 2) + ":" + nf(centiSegundos, 2);
-      text(TiempoParaMostrar, 10, 35);
-
-
-
-      this.coin.display();
-      text(this.coin.coinsRecaudadas, 1200-30, 35);
-    }
-  }
+  
 
   void keyPressed() {
 
