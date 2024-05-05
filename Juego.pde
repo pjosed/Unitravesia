@@ -107,10 +107,10 @@ textFont(mono);
   image(CountAguas,1200-112,15);/*47*/
   text(nf(this.coin.coinsRecaudadas,2), 1200-112+50,45);
   
-  if (this.coin.coinsRecaudadas%10 == 0 && this.coin.coinsRecaudadas!=0 ){
+  /*if (this.coin.coinsRecaudadas%5 == 0 && this.coin.coinsRecaudadas!=0 ){
   this.vidas = this.vidas +1 ;
   
-  }
+  }*/
 
 
   }
