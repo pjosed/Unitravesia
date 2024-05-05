@@ -1,4 +1,4 @@
-void Escena_Personajes() {
+void Escena_Personajes(int NumPer) {
   
   float suelo  = 300; // Posición del suelo 
   
@@ -17,7 +17,8 @@ void Escena_Personajes() {
 
   fondo_menu=loadImage("azuldegradado.jpg");
   image(fondo_menu, 0, 0, width, height);
-  a= "Escoje con quien deseas jugar! :)";
+  
+  a= "Escoje el jugador " + NumPer+1 + "! :)";
 
   personaje[0]= loadImage("jose.png");
   personaje[1]= loadImage("alexander.png");

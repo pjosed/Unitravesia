@@ -88,7 +88,7 @@ void draw() {
     Elegir_Escenario();
     
   } else if (Personajes) { // Si está en la seleccion del personaje
-    Escena_Personajes();
+    Escena_Personajes(Seleccionados);
   } else if (Manual) { // Si se muestra el manual
     Escena_Manual();
   } else if (Creditos) { // Se muestran los creditos
