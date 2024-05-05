@@ -204,6 +204,8 @@ class Obstaculos {
 
   float TasaNuevosObstaculos = 120;
 
+  int TiempoInicio = millis();
+  int TiempoTranscurrido;
 
 
 
@@ -217,18 +219,22 @@ class Obstaculos {
         this.obstaculos.remove(i);
       }
     }
+    
+      TiempoTranscurrido = millis() - TiempoInicio;
+      int Segundos = int(TiempoTranscurrido / 1000.0);
 
     if (frameCount % TasaNuevosObstaculos == 0 ) {
 
 
       this.TasaNuevosObstaculos = this.TasaNuevosObstaculos-1 ;
 
+
       if ( int(random(2))  == 0 ) {
 
-        Gato gatico = new Gato(1200, 450, 10);
+        Gato gatico = new Gato(1200, 450,  10+(int(floor(Segundos/20))*2));
         this.obstaculos.add(gatico);
       } else {
-        Iguana iguana = new Iguana(1200+400-400, 450-511, 10);
+        Iguana iguana = new Iguana(1200+400-400, 450-511, 10+(int(floor(Segundos/20))*2));
         this.obstaculos.add(iguana);
       }
     }
