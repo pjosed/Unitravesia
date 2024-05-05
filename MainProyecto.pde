@@ -24,6 +24,8 @@ PImage escprincipal; // Escenario principal
 PImage manual;
 PImage fondo_menu;
 PImage fondo2;
+PImage jugador1;
+PImage jugador2;
 boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false, ColisionPlaying=false, ColisionRec=false;
 
 
