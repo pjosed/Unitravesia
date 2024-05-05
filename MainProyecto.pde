@@ -1,4 +1,6 @@
 import gifAnimation.*;
+import processing.sound.*;
+SoundFile Menú, juego, coin;
 int speed=10;
 PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
@@ -19,7 +21,7 @@ PImage atras;
 PImage credits;
 PImage escprincipal; // Escenario principal
 PImage manual;
-
+boolean MusicaPlaying= false;
 
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
@@ -43,6 +45,7 @@ PFont mono;
 mono = createFont("PoetsenOne-Regular.ttf", 38);
 textFont(mono);
 
+iniciarMusicaMenu();
 
 }
 
@@ -51,12 +54,24 @@ textFont(mono);
 void draw() {
 
   if (Escena0) { // Si está en el menú
+  if (!MusicaPlaying) {
+      iniciarMusicaMenu();
+    }
     Escena_Menu();
-  } else if (Escena1) { // Si está en la escena del videojuego
+
+    
+  } else if (Escena1) { 
+      detenerMusicaMenu();
+    iniciarMusicaJuego();
   PFont mono;
 mono = createFont("PoetsenOne-Regular.ttf", 38);
 textFont(mono);
-     E1.draw(); 
+
+ E1.draw(); 
+
+  
+
+  
   } else if (Escenarios) {
     Elegir_Escenario();
     
@@ -211,4 +226,36 @@ void keyReleased() {
        E1.keyReleased();
     }
   }
+}
+
+void iniciarMusicaMenu() {
+  Menú = new SoundFile(this, "MenuCanción.mp3");
+  Menú.amp(0.3); // Volumen
+  Menú.rate(1); // Velocidad
+  Menú.loop();
+  MusicaPlaying = true;
+}
+
+void detenerMusicaMenu() {
+  if (MusicaPlaying) {
+    Menú.stop();
+    MusicaPlaying = false;
+  }
+}
+
+void iniciarMusicaJuego() {
+  if (juego == null) {
+    juego = new SoundFile(this, "MarioCanción.mp3");
+    juego.amp(0.3); // Volumen
+    juego.rate(1); // Velocidad
+    juego.loop();
+  }
+}
+
+void CoinRecogida() {
+ coin = new SoundFile(this, "SonidoCoin.mp3");
+ coin.amp(0.3); // Volumen
+ coin.rate(1); // Velocidad
+ coin.loop();
+  
 }
