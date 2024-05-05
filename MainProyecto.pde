@@ -7,6 +7,7 @@ PImage []escenario = new PImage [4]; // posibles escenarios
 PImage menu[] = new PImage [5];
 int xmenu = 0, ymenu = 0; // Posicion en x y de la imagen menú
 boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false,Escenarios=false, Recovery=false;
+boolean Creditos2=false;
 boolean izquierda = false, derecha = false;
 boolean confirmar_vida=false;
 PImage botones[]= new PImage[3];
@@ -18,8 +19,8 @@ int sz2=40;
 int cl1=int(random(256)); // color r
 int cl2=int(random(256)); // color g
 int cl3=int(random(256)); // color b
-PImage atras;
-PImage credits;
+PImage atras, adelante;
+PImage credits, credits2;
 PImage escprincipal; // Escenario principal
 PImage manual;
 PImage fondo_menu;
@@ -93,6 +94,8 @@ void draw() {
     Escena_Manual();
   } else if (Creditos) { // Se muestran los creditos
     Escena_Creditos();
+  }else if (Creditos2) { // Se muestran los creditos
+    Escena_Creditos2();
   }else if (Escena_MultiOnly){
   pregunta();
   }
@@ -199,9 +202,32 @@ void mousePressed() {
       link("https://hoopgame.net/play/Sonic-the-Hedgehog");
     } else if (mouseX>715 & mouseX<1109 & mouseY>431 & mouseY<545) {
       link("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Fpergamino&psig=AOvVaw1AkY8kXMf75bUwEn9a50jh&ust=1713975048870000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIiJ_ePc2IUDFQAAAAAdAAAAABAE");
+    } else if (mouseX>38 & mouseX<93 & mouseY>26 & mouseY<75) { // VOY A LOS CREDITOS 2
+      Creditos= false;
+      Creditos2=true;
+      click();
     }
-    println ("X ES: ", mouseX);
-    println ("Y ES: ", mouseY);
+  }
+  
+  if(Creditos2){
+    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
+      Creditos2= false;
+      Creditos=true;
+      click();
+    } else if (mouseX>164 & mouseX<655 & mouseY>158 & mouseY<173) {
+      link("https://www.youtube.com/watch?v=YV2MhItwEk8");
+    } else if (mouseX>167 & mouseX<657 & mouseY>229 & mouseY<247) {
+      link("https://www.youtube.com/watch?v=sj8Ar0o4Z7k");
+    } else if (mouseX>166 & mouseX<655 & mouseY>301 & mouseY<318) {
+      link("https://www.youtube.com/watch?v=3t4MduIPW_0");
+    } else if (mouseX>166 & mouseX<655 & mouseY>375 & mouseY<392) {
+      link("https://www.youtube.com/watch?v=1FpStbIrcUE");
+    } else if (mouseX>166 & mouseX<655 & mouseY>446 & mouseY<461) {
+      link("https://www.youtube.com/watch?v=do5DHs9VGSw");
+    } else if (mouseX>811 & mouseX<1114 & mouseY>177 & mouseY<217) {
+      link("https://www.pngwing.com/es/free-png-maupq");
+    } 
+    
   }
    if(Manual){
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS

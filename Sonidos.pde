@@ -1,5 +1,5 @@
 void iniciarMusicaMenu() {
-  Menú = new SoundFile(this, "MenuCanción.mp3");
+  Menú = new SoundFile(this, "MenuCancion.mp3");
   Menú.amp(0.3); // Volumen
   Menú.rate(1); // Velocidad
   Menú.loop();
