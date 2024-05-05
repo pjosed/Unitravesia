@@ -567,6 +567,8 @@ class Coin {
     if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 <= this.x + anchoCoin   &&   yPersonaje + altoPersonaje >= this.y) {
       this.x=random(0, 1200-anchoCoin-30);
       this.coinsRecaudadas = this.coinsRecaudadas + 1;
+      CoinRec=true;
+      CoinPlaying=false;
     }
   }
 }

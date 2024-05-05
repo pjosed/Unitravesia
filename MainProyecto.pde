@@ -21,7 +21,7 @@ PImage atras;
 PImage credits;
 PImage escprincipal; // Escenario principal
 PImage manual;
-boolean MusicaPlaying= false;
+boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false;
 
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
@@ -58,20 +58,22 @@ void draw() {
       iniciarMusicaMenu();
     }
     Escena_Menu();
-
     
+  
   } else if (Escena1) { 
-      detenerMusicaMenu();
-    iniciarMusicaJuego();
+  detenerMusicaMenu();
+  iniciarMusicaJuego();
   PFont mono;
-mono = createFont("PoetsenOne-Regular.ttf", 38);
-textFont(mono);
-
- E1.draw(); 
-
+  mono = createFont("PoetsenOne-Regular.ttf", 38);
+  textFont(mono);
   
-
+  E1.draw(); 
   
+  if(CoinRec){
+    CoinRecogida();
+    CoinRec=false;
+  }
+
   } else if (Escenarios) {
     Elegir_Escenario();
     
@@ -253,9 +255,11 @@ void iniciarMusicaJuego() {
 }
 
 void CoinRecogida() {
+  if(!CoinPlaying){
  coin = new SoundFile(this, "SonidoCoin.mp3");
  coin.amp(0.3); // Volumen
  coin.rate(1); // Velocidad
- coin.loop();
-  
+ coin.play();
+ CoinPlaying=true;
+  }
 }
