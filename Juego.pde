@@ -52,6 +52,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
           boleaColision=true;
           ColisionRec=true;
       ColisionPlaying=false;
+          ColisionSonido();
+    ColisionRec=false;
           
         }
         Jugadores.get(j).draw();
@@ -587,6 +589,7 @@ class Coin {
       this.coinsRecaudadas = this.coinsRecaudadas + 1;
       CoinRec=true;
       CoinPlaying=false;
+      CoinRecogida();
       if (coinsRecaudadas%10==0){
         confirmar_vida=true;
       }
