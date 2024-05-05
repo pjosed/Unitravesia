@@ -1,5 +1,5 @@
 import gifAnimation.*;
-int speed=5;
+int speed=10;
 PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
 PImage menu[] = new PImage [5];

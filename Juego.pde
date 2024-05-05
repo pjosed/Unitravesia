@@ -22,7 +22,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     
     int TiempoInicio;
     int TiempoTranscurrido;
-    boolean  boleaColision;
+    boolean  boleaColision=false;
   
     // Setter para la variable "personaje"
 
@@ -43,7 +43,7 @@ void draw (){
      obstaculosEscena.draw();
      
      for(int j =0; j < Jugadores.size() ; j++){//Preguntar por cada Jugador
-     if(obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal)){
+     if(obstaculosEscena.Chocaron(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal,this.boleaColision)){
        this.vidas=vidas-1;
        this.UlFoto=frameCount;
        boleaColision=true;
@@ -106,6 +106,11 @@ textFont(mono);
   this.coin.display();
   image(CountAguas,1200-112,15);/*47*/
   text(nf(this.coin.coinsRecaudadas,2), 1200-112+50,45);
+  
+  if (this.coin.coinsRecaudadas%10 == 0 && this.coin.coinsRecaudadas!=0 ){
+  this.vidas = this.vidas +1 ;
+  
+  }
 
 
   }
@@ -218,23 +223,21 @@ class Obstaculos {
       }
     }
   }
-
-  boolean  Chocaron(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje) {
-
-    for (int i = obstaculos.size() - 1; i >= 0; i--) {
-
-      if (this.obstaculos.get(i).golpeaJugador( xPersonaje, anchoPersonaje, yPersonaje, altoPersoanje)) {
-        // Si el perosonaje  choca con un , detener el juego
-        textSize(32);
-        fill(255, 0, 0);
-        text("¡Juego terminado!", width/2 - 150, height/2);
-        noLoop();
-        return true;
-      }
+  
+   boolean  Chocaron(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje, boolean boleaColision){
+   
+ for (int i = obstaculos.size() - 1; i >= 0; i--) {
+   
+if (this.obstaculos.get(i).golpeaJugador( xPersonaje,  anchoPersonaje, yPersonaje,  altoPersoanje, boleaColision)) {
+      // Si el perosonaje  choca con un , detener el juego 
+      return true;
     }
+ }
+ return false ;
 
-    return false ;
-  }
+ } 
+
+
 }
 
 
@@ -324,10 +327,14 @@ class Iguana implements Obstaculo {
 
   // Método para verificar si el gato golpea al personaje
 
-  boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
-    // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
-
-    return (xPersonaje + anchoPersonaje - 20 >=   this.xpopo && xPersonaje+10 <= this.xpopo + AnchoPopo    &&  (this.ypopo < yPersonaje+altoPersonaje && this.ypopo+AltoPopo > yPersonaje)  )   ;
+    boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje, boolean boleaColision) {
+   
+         if(boleaColision==false){
+           return (xPersonaje + anchoPersonaje - 20 >=   this.xpopo && xPersonaje < this.xpopo + AnchoPopo    &&  (this.ypopo < yPersonaje+altoPersonaje && this.ypopo+AltoPopo > yPersonaje)  )   ;
+         }else{
+           return false;
+         }
+    
   }
 }
 
@@ -371,16 +378,18 @@ class Gato implements Obstaculo {
   }
 
   // Método para verificar si el gato golpea al personaje
-
-  boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
+    boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje, boolean boleaColision) {
     // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
-
-    //line(0, this.y, 1200, this.y);
-    //line(0,yPersonaje + altoPersonaje-20, 1200, yPersonaje + altoPersonaje-20);
-
-
-    return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
+         if(boleaColision==false){
+           return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
+         }else{
+           return false;
+         }
+    
   }
+  
+  
+
 }
 
 
@@ -389,7 +398,7 @@ class Gato implements Obstaculo {
 interface Obstaculo {
   void display();
   void update();
-  boolean golpeaJugador(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje );
+  boolean golpeaJugador(float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersoanje, boolean boleaColision );
 
   float x = 0;
   float y = 0;
@@ -436,7 +445,7 @@ class Jugador {
       
       // Aplicar gravedad
       if (this.ypos < suelo-Height_Personaje_Principal) {
-        this.ypos =this.ypos+ grav+40;
+        this.ypos =this.ypos+15;
       } else {
         this.ypos = suelo-Height_Personaje_Principal; // Asegurar que el personaje no atraviese el suelo
         jumping1 = false; // Detener el salto cuando toca el suelo
@@ -452,7 +461,7 @@ class Jugador {
       
       // Aplicar gravedad
       if (this.ypos < suelo-Height_Personaje_Principal) {
-        this.ypos =this.ypos+ grav;
+        this.ypos =this.ypos+ 15;
       } else {
         this.ypos = suelo-Height_Personaje_Principal; // Asegurar que el personaje no atraviese el suelo
         jumping2 = false; // Detener el salto cuando toca el suelo
@@ -480,7 +489,7 @@ class Jugador {
       this.leftKeyPressed1 = true;
     } else if (keyCode == 'w' || keyCode=='W' && !jumping1) {
       this.jumping1 = true;
-      this.ypos -= 200; // Salto
+      this.ypos -= 500; // Salto
     }
   
     
@@ -491,7 +500,7 @@ class Jugador {
         this.leftKeyPressed2 = true;
       } else if (keyCode == UP && !jumping2) {
         this.jumping2 = true;
-        this.ypos -= 200; // Salto
+        this.ypos -= 400; // Salto
       }
     
     }
@@ -550,7 +559,7 @@ class Coin {
 
     this.ImgAgua.resize(anchoCoin, altoCoin);
 
-    this.x=random(0, 1200-anchoCoin);
+    this.x=random(0, 1200-anchoCoin-75);
   }
 
 
