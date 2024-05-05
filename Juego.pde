@@ -1,4 +1,4 @@
-float suelo = 450; // Posición del suelo
+float suelo = 480; // Posición del suelo
 PImage CantAgua;
 
 
@@ -19,7 +19,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
   Obstaculos obstaculosEscena = new Obstaculos();
   boolean pausa = false;
   PImage Escenario;
-  float suelo = 450; // Posición del suelo
+  float suelo = 480; // Posición del suelo
 
   int TiempoInicio;
   int TiempoTranscurrido;
@@ -38,7 +38,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       background(255);
 
       image(Escenario, 0, 0 ); //Escenario
-      image(piso, 0, suelo); // Piso
+      image(piso, 0, 450); // Piso
 
       obstaculosEscena.draw();
 
@@ -236,10 +236,10 @@ class Obstaculos {
 
       if ( int(random(2))  == 0 ) {
 
-        Gato gatico = new Gato(1200, 450,  10+(int(floor(Segundos/20))*2));
+        Gato gatico = new Gato(1200, suelo,  10+(int(floor(Segundos/20))*2));
         this.obstaculos.add(gatico);
       } else {
-        Iguana iguana = new Iguana(1200+400-400, 450-511, 10+(int(floor(Segundos/20))*2));
+        Iguana iguana = new Iguana(1200+400-400, suelo-511, 10+(int(floor(Segundos/20))*2));
         this.obstaculos.add(iguana);
       }
     }
@@ -333,7 +333,7 @@ class Iguana implements Obstaculo {
     } else {
 
 
-      if (ypopo < 450 ) {
+      if (ypopo < 480 ) {
 
         xpopo -= speedPopoX;
         ypopo += speedPopoY;
@@ -566,7 +566,7 @@ class Coin {
     this.ImgAgua.resize(anchoCoin, altoCoin);
 
     this.x=random(0, 1200-anchoCoin-75);
-    this.y=450-47;
+    this.y=480-47;
   }
 
 
@@ -575,7 +575,7 @@ class Coin {
   // Método para dibujar el agua en la pantalla
   void display() {
 
-    image(ImgAgua, x, 450-altoCoin);
+    image(ImgAgua, x, 480-altoCoin);
   }
 
   // Método para verificar si el gato golpea al personaje
