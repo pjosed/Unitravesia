@@ -50,6 +50,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
           this.vidas=vidas-1;
           this.UlFoto=frameCount;
           boleaColision=true;
+          ColisionRec=true;
+      ColisionPlaying=false;
           
         }
         Jugadores.get(j).draw();
@@ -380,7 +382,7 @@ class Gato implements Obstaculo {
 
   // Método para verificar si el gato golpea al personaje
   boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje, boolean boleaColision) {
-    // Verificar si las coordenadas del cactus se superponen con las del dinosaurio
+    // Verificar si las coordenadas del obstaculo se superponen con las del personaje
     if (boleaColision==false) {
       return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
     } else {

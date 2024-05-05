@@ -1,6 +1,6 @@
 import gifAnimation.*;
 import processing.sound.*;
-SoundFile Menú, juego, coin;
+SoundFile Menú, juego, coin, colision;
 int speed=10;
 PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
@@ -23,7 +23,7 @@ PImage escprincipal; // Escenario principal
 PImage manual;
 PImage fondo_menu;
 PImage fondo2;
-boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false;
+boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false, ColisionPlaying=false, ColisionRec=false;
 
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
@@ -75,6 +75,11 @@ void draw() {
     CoinRecogida();
     CoinRec=false;
   }
+   if(ColisionRec){
+    ColisionSonido();
+    ColisionRec=false;
+  }
+  
 
   } else if (Escenarios) {
     Elegir_Escenario();
@@ -263,5 +268,15 @@ void CoinRecogida() {
  coin.rate(1); // Velocidad
  coin.play();
  CoinPlaying=true;
+  }
+}
+
+void ColisionSonido() {
+  if(!ColisionPlaying){
+ colision = new SoundFile(this, "SonidoExplosion.mp3");
+ colision.amp(0.3); // Volumen
+ colision.rate(1); // Velocidad
+ colision.play();
+ ColisionPlaying=true;
   }
 }
