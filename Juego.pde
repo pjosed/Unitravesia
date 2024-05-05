@@ -103,7 +103,10 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       text(nf(this.coin.coinsRecaudadas, 2), 1200-112+50, 45);
 
 
-
+      if(confirmar_vida==true){
+        vidas=vidas+1;
+        confirmar_vida=false;
+      }
       corazon.resize(50, 40);
       image(corazon, (width/2)-30, 10);
       textSize(40);
