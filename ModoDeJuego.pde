@@ -1,5 +1,5 @@
 void pregunta(){ ///////////////////////////////////////////////////////PREGUNTA SI 1 O 2 JUGADORES
-
+  background(0,0,0);
   fondo2=loadImage("fondo2.jpg");
   image(fondo2, 0, 0, width, height);
   textSize(40);

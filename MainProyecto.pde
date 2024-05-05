@@ -6,7 +6,7 @@ PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
 PImage menu[] = new PImage [5];
 int xmenu = 0, ymenu = 0; // Posicion en x y de la imagen menú
-boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false,Escenarios=false;
+boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false,Escenarios=false, Recovery=false;
 boolean izquierda = false, derecha = false;
 boolean confirmar_vida=false;
 PImage botones[]= new PImage[3];
@@ -245,6 +245,23 @@ void keyPressed() {
    if (Escena1) {
        E1.keyPressed();
     }
+    
+   if (Recovery == true ){
+   if(keyCode == 'K' || keyCode == 'k'){
+   exit();
+   
+   }
+   
+      if(keyCode == 'R' || keyCode == 'r'){
+        background(0,0,0);
+      E1 = new Escena_Juego();
+       E1.setEscenario(escprincipal);
+       E1.setPersonaje(pprincipal);
+       Recovery = false;
+       Escena1=true;
+   }
+     
+   }
     
   }
 

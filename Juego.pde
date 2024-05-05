@@ -2,7 +2,7 @@ float suelo = 450; // Posición del suelo
 PImage CantAgua;
 
 
-Obstaculos obstaculosEscena = new Obstaculos();
+//Obstaculos obstaculosEscena = new Obstaculos();
 
 
 
@@ -16,7 +16,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
   ArrayList<Jugador>  Jugadores = new ArrayList<Jugador>();
   Coin coin;
   PImage CountAguas;
-
+  Obstaculos obstaculosEscena = new Obstaculos();
   boolean pausa = false;
   PImage Escenario;
   float suelo = 450; // Posición del suelo
@@ -69,7 +69,12 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         textSize(32);
         fill(255, 0, 0);
         text("¡GAME OVER! :(", width/2 - 150, height/2);
-        noLoop();
+         fill(0, 0, 0);
+        text("Para reiniciar oprime R", width/2 - 150, height/2+40);
+        text("Para Terminar K", width/2 - 150, height/2+30+40);
+        Escena1=false;
+        Recovery = true;
+        
       } 
 
 
@@ -430,12 +435,14 @@ class Jugador {
   boolean leftKeyPressed2 = false;
 
   //Posicion del Personaje
-  float xpos = (width/2) - (Width_Personaje_Principal/2);
+  float xpos = (width/2)/2 - (Width_Personaje_Principal/2);
   float ypos= suelo-Height_Personaje_Principal;
 
 
 
   Jugador(PImage Imagen, int controles) {
+    
+    this.xpos = (width/2)/2 - (Width_Personaje_Principal/2)+40*controles;
 
     this.Imagen  = Imagen;
     this.Imagen.resize(this.Width_Personaje_Principal, this.Height_Personaje_Principal);
@@ -506,7 +513,7 @@ class Jugador {
         this.leftKeyPressed2 = true;
       } else if (keyCode == UP && !jumping2) {
         this.jumping2 = true;
-        this.ypos -= 60; // Salto
+        this.ypos -= 500; // Salto
       }
     }
 
