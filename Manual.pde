@@ -1,5 +1,5 @@
 void Escena_Manual() { ////////////////////////////////////////////////////////////////// MANUAL
-manual=loadImage("manualsi.jpg");
+manual=loadImage("mnl.jpg");
 manual.resize(1200,600);
 image(manual, 0, 0);
 atras = loadImage("atras.png");
