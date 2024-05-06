@@ -63,4 +63,11 @@ void Escena_Menu() { ///////////////////////////////7 ESCENA DEL MENU
   }
   textSize(100);
   text(b, sz2, height/2);
+  
+  
+  Score Scores = new Score();
+  Scores.Display();
+  
+  
+  
 }

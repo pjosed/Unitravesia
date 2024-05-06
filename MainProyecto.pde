@@ -61,6 +61,7 @@ void draw() {
   if (!MusicaPlaying) {
       iniciarMusicaMenu();
     }
+    background(0,0,0);
     Escena_Menu();
     
   
