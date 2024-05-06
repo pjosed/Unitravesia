@@ -228,12 +228,15 @@ class Obstaculos {
 
   ArrayList<Obstaculo> obstaculos = new ArrayList<Obstaculo>();
 
-  float TasaNuevosObstaculos = 120;
+  float TasaNuevosObstaculos = 140;
 
   int TiempoInicio = millis();
   int TiempoTranscurrido;
 
+Obstaculos(){
 
+this.TasaNuevosObstaculos = 140;
+}
 
 
   void draw() {
@@ -254,13 +257,14 @@ class Obstaculos {
 
       this.TasaNuevosObstaculos = this.TasaNuevosObstaculos-1 ;
 
+print( TasaNuevosObstaculos);
 
       if ( int(random(2))  == 0 ) {
 
-        Gato gatico = new Gato(1200, suelo,  10+(int(floor(Segundos/20))*2));
+        Gato gatico = new Gato(1200, suelo,  7+(int(floor(Segundos/15))));
         this.obstaculos.add(gatico);
       } else {
-        Iguana iguana = new Iguana(1200+400-400, suelo-511, 10+(int(floor(Segundos/20))*2));
+        Iguana iguana = new Iguana(1200+400-400, suelo-511, 7+(int(floor(Segundos/15))));
         this.obstaculos.add(iguana);
       }
     }
