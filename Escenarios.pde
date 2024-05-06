@@ -40,6 +40,8 @@ void Elegir_Escenario () { /////////////////////////////////////////// SELECCION
       background(escenario[2]);
     } else if (mouseX >=biblioX & mouseX <= biblioX + biblioW & mouseY>= biblioY & mouseY <= biblioY+biblioH){
       background(escenario[1]);
+    } else if (mouseX >=bloqueX & mouseX <= bloqueX + bloqueW & mouseY>= bloqueY & mouseY <= bloqueY+bloqueH){
+      background(escenario[3]);
     }
   
   
