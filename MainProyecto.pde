@@ -27,6 +27,9 @@ PImage fondo_menu;
 PImage fondo2;
 PImage jugador1;
 PImage jugador2;
+PImage biblio;
+PImage casa;
+PImage bloque;
 boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false, ColisionPlaying=false, ColisionRec=false;
 
 
