@@ -48,13 +48,7 @@ void Elegir_Escenario () { /////////////////////////////////////////// SELECCION
     float y= posY[i];
     float w= ancho[i];
     float h= alto[i];
-    
-    if (mouseX >=x & mouseX <=x+w & mouseY>= y & mouseY <=y+h) { ////////// Se aplica el tint si esta sobre alguna
-      tint(255, 150);
-    } else {
-      noTint();
-    }
-    
+   
     image(imagenes[i], x, y, w, h);
   }
   
