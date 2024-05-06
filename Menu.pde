@@ -17,8 +17,7 @@ void Escena_Menu() { ///////////////////////////////7 ESCENA DEL MENU
     cl3 = 0;
   }
 
-  menu[0] = loadImage("Escenario.jpg");
-  menu[0].resize(1200, 600);
+  menu[0] = loadImage("EscPrinc.jpg");
   image(menu[0], xmenu, ymenu);
   
   menu[1]= loadImage("cse.jpg");
