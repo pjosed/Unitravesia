@@ -20,6 +20,14 @@ void Escena_Menu() { ///////////////////////////////7 ESCENA DEL MENU
   menu[0] = loadImage("Escenario.jpg");
   menu[0].resize(1200, 600);
   image(menu[0], xmenu, ymenu);
+  
+  menu[1]= loadImage("cse.jpg");
+  
+  if (mouseX >= sz2 && mouseX <= sz2 + textWidth(b) && mouseY >= height/2 - 50 && mouseY <= height/2 + 50) {
+    image(menu[1], xmenu, ymenu); ///// SI ESTA SOBRE UNITRAVESIA CAMBIAR FONDO
+  } else {
+    image(menu[0], xmenu, ymenu); // Sino usamos la imagen de fondo original
+  }
 
   botones[0] = loadImage("Boton_comenzar.png");
   botones[0].resize(width/3, 100);
