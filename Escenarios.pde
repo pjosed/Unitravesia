@@ -1,6 +1,5 @@
 void Elegir_Escenario () { /////////////////////////////////////////// SELECCION DEL ESCENARIO
-  escenario[0] = loadImage("Escenario.jpg");
-  escenario[0].resize(width, height);
+  escenario[0] = loadImage("EscPrinc.jpg");
   background(escenario[0]);
   
   escenario[1] = loadImage("bbl.jpg"); // Biblioteca
