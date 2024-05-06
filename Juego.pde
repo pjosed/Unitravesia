@@ -46,7 +46,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
       obstaculosEscena.draw();
 
-      for (int j =0; j < Jugadores.size(); j++) {//Preguntar por cada Jugador
+      for (int j =0; j < Jugadores.size(); j++) {//Preguntar por cada jugador
 
         coin.TomoAgua(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal);
 
@@ -603,7 +603,7 @@ class Coin {
   void TomoAgua (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje) {
 
 
-    if (xPersonaje + anchoPersonaje - 10 >=   this.x && xPersonaje+10 <= this.x + anchoCoin   &&   yPersonaje + altoPersonaje >= this.y) {
+    if (xPersonaje + anchoPersonaje - 10 >=   this.x & xPersonaje+10 <= this.x + anchoCoin & yPersonaje + altoPersonaje >= this.y) {
 
       this.x=int(random(0, 1200-anchoCoin-30));
       this.coinsRecaudadas = this.coinsRecaudadas + 1;

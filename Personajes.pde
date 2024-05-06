@@ -18,7 +18,7 @@ void Escena_Personajes(int NumPer) {
   fondo_menu=loadImage("azuldegradado.jpg");
   image(fondo_menu, 0, 0, width, height);
   
-  a= "Escoje el jugador " + (NumPer+1) + "! :)";
+  a= "Escoje el jugador "+(NumPer+1)+"! :)";
 
   personaje[0]= loadImage("jose.png");
   personaje[1]= loadImage("alexander.png");
