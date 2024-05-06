@@ -94,8 +94,6 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       int Segundos = int(TiempoTranscurrido / 1000.0);
 
 
-
-
       int centiSegundos = int((TiempoTranscurrido % 1000) / 10.0);
       textSize(40);
       fill(0);
@@ -108,6 +106,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       this.coin.display();
       image(CountAguas, 1200-112, 15);/*47*/
       text(nf(this.coin.coinsRecaudadas, 2), 1200-112+50, 45);
+      
+      text("Pulsa P para pausar",width/3, 600);
 
 
       if(confirmar_vida==true){

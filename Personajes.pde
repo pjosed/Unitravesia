@@ -24,6 +24,15 @@ void Escena_Personajes(int NumPer) {
   personaje[1]= loadImage("alexander.png");
   personaje[2]= loadImage("sergio.png");
   
+  animacion[0]=loadImage("josecorriendoderecha1.png");
+  animacion[1]=loadImage("josecorriendoizquierda1.png");
+  animacion[2]=loadImage("josesaltando1.png");
+  animacion[3]=loadImage("alexandercorriendoderecha1.png");
+  animacion[4]=loadImage("alexandercorriendoizquierda1.png");
+  animacion[5]=loadImage("alexandersaltando1.png");
+  animacion[6]=loadImage("sergiocorriendoderecha1.png");
+  animacion[7]=loadImage("sergiocorriendoizquierda1.png");
+  animacion[8]=loadImage("sergiosaltando1.png");
   piso = loadImage("suelo11.png");
   piso.resize(1200, 300);
   image(piso, 0, suelo);

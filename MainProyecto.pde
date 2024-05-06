@@ -1,4 +1,3 @@
-import gifAnimation.*;
 import processing.sound.*;
 SoundFile Menú, juego, coin, colision, click;
 int speed=10;
@@ -31,17 +30,13 @@ PImage biblio;
 PImage casa;
 PImage bloque;
 boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false, ColisionPlaying=false, ColisionRec=false;
-
+PImage [] animacion = new PImage[9];
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
 
-Gif []corriendo;
 
 int CantJugadores = 0;
 int Seleccionados = 0;
-
-
-
 
 Escena_Juego E1 = new Escena_Juego();
 
