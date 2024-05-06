@@ -118,6 +118,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       image(corazon, (width/2)-30, 10);
       textSize(40);
       fill(0);
+      fill(255,255, 255);
       text(vidas, (width/2)+10, 42);
 
       PFont mono;
