@@ -24,6 +24,9 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
   int TiempoInicio;
   int TiempoTranscurrido;
   boolean  boleaColision=false;
+  
+  int Tiempo_Pausa ;
+  int Tiempo_Pausa_Inicio=0;
 
   // Setter para la variable "personaje"
 
@@ -34,6 +37,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
   void draw () {
 
     if (pausa == false) {
+
 
       background(255);
 
@@ -84,11 +88,12 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
       /////// hasta aqui escenario y persona
 
+      this.TiempoInicio = this.TiempoInicio + this.Tiempo_Pausa;
+      this.Tiempo_Pausa =0;
 
+    
 
-
-
-      TiempoTranscurrido = millis() - TiempoInicio;
+      TiempoTranscurrido = millis() - (TiempoInicio+ this.Tiempo_Pausa );
 
 
       int Segundos = int(TiempoTranscurrido / 1000.0);
@@ -138,7 +143,13 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         text("¡GANASTE! :)", width/2 - 150, height/2);
         noLoop();
        }
+    }else{
+      
+     this.Tiempo_Pausa = millis() - Tiempo_Pausa_Inicio;
+     println(this.Tiempo_Pausa);
+    
     }
+      
   }
 
 
@@ -175,7 +186,14 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     }
 
     if (keyCode=='p' | keyCode=='P') {
+      
+       if(pausa == false ){
+           Tiempo_Pausa_Inicio=millis ();
+       }
+    
       this.pausa=! pausa;
+      
+
     }
   }
 
