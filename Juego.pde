@@ -18,7 +18,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
   int TiempoInicio;
   int TiempoTranscurrido;
   boolean  boleaColision=false;
-
+  
   int Tiempo_Pausa ;
   int Tiempo_Pausa_Inicio=0;
 
@@ -45,13 +45,19 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         coin.TomoAgua(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal);
 
         if (obstaculosEscena.Chocaron(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal, this.boleaColision)) {
+
           this.vidas=vidas-1;
           UlFoto=frameCount;
+
+          this.vidas=this.vidas-1;
+          this.UlFoto=frameCount;
+
           boleaColision=true;
           ColisionRec=true;
-          ColisionPlaying=false;
+      ColisionPlaying=false;
           ColisionSonido();
-          ColisionRec=false;
+    ColisionRec=false;
+          
         }
         Jugadores.get(j).draw();
       }
@@ -65,15 +71,20 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       }
       //aquí verá cuando se acaben las 3 vidas
       if (this.vidas==0) {
+        println(name_to_score);
+        S_Scores.actualizar(name_to_score,this.coin.coinsRecaudadas);
+        
+        
         textSize(32);
         fill(255, 0, 0);
         text("¡GAME OVER! :(", width/2 - 150, height/2);
-        fill(255, 255, 255);
+         fill(255,255, 255);
         text("Para reiniciar oprime R", width/2 - 150, suelo-30);
         text("Para terminar oprime K", width/2 - 150, suelo);
         Escena1=false;
         Recovery = true;
-      }
+        
+      } 
 
 
 
@@ -83,7 +94,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       this.TiempoInicio = this.TiempoInicio + this.Tiempo_Pausa;
       this.Tiempo_Pausa =0;
 
-
+    
 
       TiempoTranscurrido = millis() - (TiempoInicio+ this.Tiempo_Pausa );
 
@@ -103,22 +114,22 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       this.coin.display();
       image(CountAguas, 1200-112, 15);/*47*/
       text(nf(this.coin.coinsRecaudadas, 2), 1200-112+50, 45);
-
-      text("Pulsa P para pausar", width/3, 600);
+      
+      text("Pulsa P para pausar",width/3, 580);
 
       //// Se aumentan las vidas
-      if (confirmar_vida==true) {
+      if(confirmar_vida==true){
         vidas=vidas+1;
         confirmar_vida=false;
       }
-      if (vidas>3) {
+      if(vidas>3){
         vidas=3;
       }
       corazon.resize(50, 40);
       image(corazon, (width/2)-30, 10);
       textSize(40);
       fill(0);
-      fill(255, 255, 255);
+      fill(255,255, 255);
       text(vidas, (width/2)+10, 42);
 
       PFont mono;
@@ -131,8 +142,8 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
        this.vidas = this.vidas +1 ;
        
        }*/
-
-      if (Segundos==100) {
+       
+       if(Segundos==100){
         textSize(32);
         fill(255, 0, 0);
         text("¡GANASTE! :)", width/2 - 150, height/2);
@@ -140,12 +151,14 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         text("Para terminar oprime K", width/2 - 150, suelo);
         Escena1=false;
         Recovery = true;
-      }
-    } else {
-
-      this.Tiempo_Pausa = millis() - Tiempo_Pausa_Inicio;
-      println(this.Tiempo_Pausa);
+       }
+    }else{
+      
+     this.Tiempo_Pausa = millis() - Tiempo_Pausa_Inicio;
+     println(this.Tiempo_Pausa);
+    
     }
+      
   }
 
 
@@ -182,12 +195,15 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     }
 
     if (keyCode=='p' | keyCode=='P') {
-
-      if (pausa == false ) {
-        Tiempo_Pausa_Inicio=millis ();
-      }
-
+      text("Pausado",width/2-60, 300);
+      
+       if(pausa == false ){
+           Tiempo_Pausa_Inicio=millis ();
+       }
+    
       this.pausa=! pausa;
+      
+
     }
   }
 
@@ -227,11 +243,11 @@ class Obstaculos {
   int TiempoInicio = millis();
   int TiempoTranscurrido;
 
-  Obstaculos() {
+Obstaculos(){
     ArrayList<Obstaculo> obstaculos = new ArrayList<Obstaculo>();
 
-    this.TasaNuevosObstaculos = 150;
-  }
+this.TasaNuevosObstaculos = 150;
+}
 
 
   void draw() {
@@ -243,20 +259,20 @@ class Obstaculos {
         this.obstaculos.remove(i);
       }
     }
-
-    TiempoTranscurrido = millis() - TiempoInicio;
-    int Segundos = int(TiempoTranscurrido / 1000.0);
+    
+      TiempoTranscurrido = millis() - TiempoInicio;
+      int Segundos = int(TiempoTranscurrido / 1000.0);
 
     if (frameCount % TasaNuevosObstaculos == 0 ) {
 
 
       this.TasaNuevosObstaculos = this.TasaNuevosObstaculos;
 
-      print( TasaNuevosObstaculos);
+print( TasaNuevosObstaculos);
 
       if ( int(random(2))  == 0 ) {
 
-        Gato gatico = new Gato(1200, suelo, 5+(int(floor(Segundos/15))));
+        Gato gatico = new Gato(1200, suelo,  5+(int(floor(Segundos/15))));
         this.obstaculos.add(gatico);
       } else {
         Iguana iguana = new Iguana(1200+400-400, suelo-511, 5+(int(floor(Segundos/15))));
@@ -418,7 +434,12 @@ class Gato implements Obstaculo {
   boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje, boolean boleaColision) {
     // Verificar si las coordenadas del obstaculo se superponen con las del personaje
     if (boleaColision==false) {
-      return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
+      if (xPersonaje + anchoPersonaje  -30 >=   this.x && xPersonaje+20 <= this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y) {
+   
+      delay(100);
+      
+      }
+      return (xPersonaje + anchoPersonaje  -10 >=   this.x && xPersonaje+10 <= this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
     } else {
       return false;
     }
@@ -461,7 +482,7 @@ class Jugador {
 
 
   Jugador(PImage Imagen, int controles) {
-
+    
     this.xpos = (width/2)/2 - (Width_Personaje_Principal/2)+40*controles;
 
     this.Imagen  = Imagen;
@@ -608,7 +629,7 @@ class Coin {
       CoinRec=true;
       CoinPlaying=false;
       CoinRecogida();
-      if (coinsRecaudadas%10==0) {
+      if (coinsRecaudadas%10==0){
         confirmar_vida=true;
       }
     }
