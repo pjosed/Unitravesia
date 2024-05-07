@@ -20,9 +20,9 @@ void Escena_Personajes(int NumPer) {
   
   a= "Escoje el jugador "+(NumPer+1)+"! :)";
 
-  personaje[0]= loadImage("jose.png");
-  personaje[1]= loadImage("alexander.png");
-  personaje[2]= loadImage("sergio.png");
+  personaje[0]= loadImage("Jose.png");
+  personaje[1]= loadImage("Alexander.png");
+  personaje[2]= loadImage("Sergio.png");
   
   animacion[0]=loadImage("josecorriendoderecha1.png");
   animacion[1]=loadImage("josecorriendoizquierda1.png");

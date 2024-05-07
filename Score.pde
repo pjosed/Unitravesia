@@ -1,56 +1,94 @@
 class Score{
-/*  
-  String[] Base_datos; 
+
+  String Nombres_Displays[]= new String[3];
+  int  Scores[]= new int[3];
+  int i = 0;
   
-  String Base_Datos = loadStrings("BaseDatos.txt");
-  
-  
-  score (){
-  
-  
-  
+  Score (){
+   String[] lineas = loadStrings("BaseDatos.txt");
+  for (String linea : lineas) {
+
+    String linea1 = split(linea, ",")[0];
+    Nombres_Displays[i]= linea1;
+    String linea2 = split(linea, ",")[1];
+    Scores[i]= int(linea2);
+    this.i +=1;
+
+  }
+ 
   
   }
   
-  */
+  
+
   
   PImage tabla = loadImage("tabla.png");
   
-  int i = 1;
+
   
   void Display (){
+    
+    ordenar();
+    
   tabla.resize(450,180);
-  String[] lineas = loadStrings("BaseDatos.txt");
-  
    image(tabla, 375,384);
    textSize(20);
   
-  for (String linea : lineas) {
+  int n = Scores.length;
+  for (int i = 0; i <= n-1; i++) {
     
     fill(255,255,255);
-    
-    String linea1 = split(linea, ",")[0];
-    String linea2 = split(linea, ",")[1];
+   
     
 
-    text(linea1, 500, 500+30*(i%3));
-    text(linea2, 500+130, 500+30*(i%3));
-    this.i +=1;
-    println();
+    text(Nombres_Displays[i], 450, 455+40*(i%3));
+    text(Scores[i], 690, 455+40*(i%3));
+  }
+  
+  }
+
+ 
+  void ordenar(){
+    
+    int n = Scores.length;
+    for (int i = 0; i < n-1; i++) {
+      for (int j = 0; j < n-i-1; j++) {
+        if (Scores[j] > Scores[j+1]) {
+        int copia = Scores[j];
+        Scores[j] = Scores[j+1];
+        Scores[j+1] = copia;
+        
+        String copiaNombre = Nombres_Displays[j];
+        Nombres_Displays[j] = Nombres_Displays[j+1];
+        Nombres_Displays[j+1] = copiaNombre;
+        
+        }}}
 
   }
   
-  }
-  /*
-  metodo ordenar{
+  void actualizar( String name,int N_Coin){
     
+    int n = Scores.length;
+    for (int i = 0; i <= n-1; i++) {
+      if (EliminarEspacios(Nombres_Displays[i])==name){
+        
+        Scores[i]=N_Coin;
+      
+      }
+      
+    }
+  }
+  
+  String EliminarEspacios(String palabra) {
+  int j = 0;
+  while (j  < palabra.length() && palabra.charAt(j) == ' ') {
+    j++;
+  }
+  return palabra.substring(j);
+}
   
   
-  metodo actualizar record{
-    
-    
-  }
- */ 
+  
   
   
   
