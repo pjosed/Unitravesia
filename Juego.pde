@@ -113,7 +113,9 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         vidas=vidas+1;
         confirmar_vida=false;
       }
-      
+      if(vidas>3){
+        vidas=3;
+      }
       corazon.resize(50, 40);
       image(corazon, (width/2)-30, 10);
       textSize(40);
