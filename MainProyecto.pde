@@ -31,6 +31,7 @@ PImage casa;
 PImage bloque;
 boolean MusicaPlaying= false, CoinPlaying=false, CoinRec=false, ColisionPlaying=false, ColisionRec=false;
 PImage [] animacion = new PImage[9];
+String jose, alexander, sergio;
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
 
@@ -173,6 +174,11 @@ void mousePressed() {
       click();
     }
     
+    if(CantJugadores==1 | CantJugadores==2){
+       jose="Jose";
+       alexander="Alexander";
+       sergio="Sergio";
+    }
     if (Seleccionados == CantJugadores) {
       Personajes= false;
       Escena1=true;
