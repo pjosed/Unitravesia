@@ -108,11 +108,12 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       
       text("Pulsa P para pausar",width/3, 600);
 
-
-      if(confirmar_vida==true){
+      //// Se aumentan las vidas
+      if(confirmar_vida==true && vidas<3){
         vidas=vidas+1;
         confirmar_vida=false;
       }
+      
       corazon.resize(50, 40);
       image(corazon, (width/2)-30, 10);
       textSize(40);
