@@ -34,7 +34,7 @@ PImage [] animacion = new PImage[9];
 String jose, alexander, sergio;
 
 ArrayList<PImage> pprincipal = new ArrayList<PImage>(); // PersonajesSeleccionados Principal
-
+String name_to_score="TR";
 
 int CantJugadores = 0;
 int Seleccionados = 0;
@@ -42,13 +42,16 @@ int Seleccionados = 0;
 Escena_Juego E1 = new Escena_Juego();
 
 
-
+Score S_Scores;
 
 void setup() {
   size(1200, 600);
 PFont mono;
 mono = createFont("PoetsenOne-Regular.ttf", 38);
 textFont(mono);
+
+
+ S_Scores =new Score();
 
 iniciarMusicaMenu();
 
@@ -97,6 +100,7 @@ void draw() {
   }else if (Creditos2) { // Se muestran los creditos
     Escena_Creditos2();
   }else if (Escena_MultiOnly){
+  background(255,255,255);
   pregunta();
   }
 }
@@ -122,10 +126,7 @@ void mousePressed() {
       Creditos = true;
       click();
     }
-  }
-  
-  
-  if (Escenarios) { // SI ESTOY EN EL MENU ESCENARIOS
+  }else if (Escenarios) { // SI ESTOY EN EL MENU ESCENARIOS
    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Escenarios= false;
       Escena0=true;
@@ -137,11 +138,12 @@ void mousePressed() {
       escprincipal= escenario[1];
       click();
     }else if (mouseX>454 & mouseX<798 & mouseY>299 & mouseY<497) { // Escenario Casa estudio
-      Escenarios= false;
       Escena_MultiOnly=true;
+      Escenarios= false;
       //Personajes=true;
       escprincipal= escenario[2];
       click();
+ 
     }else if (mouseX>800 & mouseX<1147 & mouseY>98 & mouseY<297) { // Escenario Bloque J
       Escenarios= false;
       Escena_MultiOnly=true;
@@ -150,21 +152,27 @@ void mousePressed() {
       click();
     }
   
-  }
-  
-  
-  if (Personajes) { // SI ESTOY SELECCIONANDO PERSONAJES
+  }else if (Personajes) { // SI ESTOY SELECCIONANDO PERSONAJES
  
     if (mouseX>34 & mouseX<124 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE JOSE
+      if(CantJugadores==1){
+     name_to_score="Jose";
+    }
       pprincipal.add(personaje[0]);
       Seleccionados +=1;
       click();
     } else if (mouseX>420 & mouseX<519 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE ALEXANDER
+      if(CantJugadores==1){
+      name_to_score="Alexander";
+    }
       pprincipal.add(personaje[1]);
       Seleccionados +=1;
       click();
 
     } else if (mouseX>806 & mouseX<918 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE SERGIO
+      if(CantJugadores==1){
+      name_to_score="Sergio";
+    }
       pprincipal.add(personaje[2]);
       Seleccionados +=1;
       click();
@@ -174,11 +182,7 @@ void mousePressed() {
       click();
     }
     
-    if(CantJugadores==1 | CantJugadores==2){
-       jose="Jose";
-       alexander="Alexander";
-       sergio="Sergio";
-    }
+  
     if (Seleccionados == CantJugadores) {
       Personajes= false;
       Escena1=true;
@@ -186,9 +190,7 @@ void mousePressed() {
       E1.setPersonaje(pprincipal);
     }
     
-  }
-
-  if (Creditos) {
+  }else if (Creditos) {
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Creditos= false;
       Escena0=true;
@@ -212,9 +214,7 @@ void mousePressed() {
       Creditos2=true;
       click();
     }
-  }
-  
-  if(Creditos2){
+  }else if(Creditos2){
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Creditos2= false;
       Creditos=true;
@@ -233,20 +233,14 @@ void mousePressed() {
       link("https://www.pngwing.com/es/free-png-maupq");
     } 
     
-  }
-   if(Manual){
+  }else if(Manual){
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Manual=false;
       Escena0=true;
       click();
     }
     
-  }
-  
- 
-  
-  
-  if(Escena_MultiOnly){ ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES 
+  }else if(Escena_MultiOnly){ ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES 
   
     if (mouseX>401 & mouseX<798 & mouseY>137 & mouseY<229) { //////////// 1 JUGADOR
       Escena_MultiOnly= false;

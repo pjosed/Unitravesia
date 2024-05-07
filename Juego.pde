@@ -45,7 +45,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         coin.TomoAgua(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal);
 
         if (obstaculosEscena.Chocaron(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal, this.boleaColision)) {
-          this.vidas=vidas-1;
+          this.vidas=this.vidas-1;
           this.UlFoto=frameCount;
           boleaColision=true;
           ColisionRec=true;
@@ -66,6 +66,10 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       }
       //aquí verá cuando se acaben las 3 vidas
       if (this.vidas==0) {
+        println(name_to_score);
+        S_Scores.actualizar(name_to_score,this.coin.coinsRecaudadas);
+        
+        
         textSize(32);
         fill(255, 0, 0);
         text("¡GAME OVER! :(", width/2 - 150, height/2);
@@ -106,7 +110,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
       image(CountAguas, 1200-112, 15);/*47*/
       text(nf(this.coin.coinsRecaudadas, 2), 1200-112+50, 45);
       
-      text("Pulsa P para pausar",width/3, 600);
+      text("Pulsa P para pausar",width/3, 580);
 
       //// Se aumentan las vidas
       if(confirmar_vida==true){
@@ -186,6 +190,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
     }
 
     if (keyCode=='p' | keyCode=='P') {
+      text("Pausado",width/2-60, 300);
       
        if(pausa == false ){
            Tiempo_Pausa_Inicio=millis ();
@@ -424,7 +429,12 @@ class Gato implements Obstaculo {
   boolean golpeaJugador (float xPersonaje, int anchoPersonaje, float yPersonaje, int altoPersonaje, boolean boleaColision) {
     // Verificar si las coordenadas del obstaculo se superponen con las del personaje
     if (boleaColision==false) {
-      return (xPersonaje + anchoPersonaje - 20 >=   this.x && xPersonaje < this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
+      if (xPersonaje + anchoPersonaje  -30 >=   this.x && xPersonaje+20 <= this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y) {
+   
+      delay(100);
+      
+      }
+      return (xPersonaje + anchoPersonaje  -10 >=   this.x && xPersonaje+10 <= this.x + anchoGato    &&   yPersonaje + altoPersonaje > this.y)   ;
     } else {
       return false;
     }

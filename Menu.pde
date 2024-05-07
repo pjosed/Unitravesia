@@ -19,9 +19,9 @@ void Escena_Menu() { ///////////////////////////////7 ESCENA DEL MENU
 
   menu[0] = loadImage("EscPrinc.jpg");
   image(menu[0], xmenu, ymenu);
-  
+
   menu[1]= loadImage("cse.jpg");
-  
+
   if (mouseX >= sz2 && mouseX <= sz2 + textWidth(b) && mouseY >= height/2 - 50 && mouseY <= height/2 + 50) {
     image(menu[1], xmenu, ymenu); ///// SI ESTA SOBRE UNITRAVESIA CAMBIAR FONDO
   } else {
@@ -62,11 +62,8 @@ void Escena_Menu() { ///////////////////////////////7 ESCENA DEL MENU
   }
   textSize(100);
   text(b, sz2, height/2);
-  
-  
+
+
   Score Scores = new Score();
   Scores.Display();
-  
-  
-  
 }

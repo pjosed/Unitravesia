@@ -88,6 +88,17 @@ class Score{
 }
   
   
+
+  
+      for (int i = 0; i < n; i++) {
+        println(Nombres_Displays[i]+","+Scores[i],"rrrrrrrrrrrrrrrr");
+         writer.println(Nombres_Displays[i]+","+Scores[i]);
+     }
+ 
+  
+ 
+  writer.flush(); 
+  writer.close();
   
   
   
@@ -98,3 +109,4 @@ class Score{
 
 
 }
+
