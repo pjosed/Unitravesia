@@ -46,7 +46,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
 
         if (obstaculosEscena.Chocaron(Jugadores.get(j).xpos, Jugadores.get(j).Width_Personaje_Principal, Jugadores.get(j).ypos, Jugadores.get(j).Height_Personaje_Principal, this.boleaColision)) {
           this.vidas=vidas-1;
-          this.UlFoto=frameCount;
+          UlFoto=frameCount;
           boleaColision=true;
           ColisionRec=true;
           ColisionPlaying=false;
@@ -60,7 +60,7 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
        coin.TomoAgua(Jugadores.get(j).xpos,Jugadores.get(j).Width_Personaje_Principal,Jugadores.get(j).ypos,Jugadores.get(j).Height_Personaje_Principal);
        }*/
 
-      if (frameCount-this.UlFoto>=40) {
+      if (frameCount-UlFoto>=40) {
         boleaColision=false;
       }
       //aquí verá cuando se acaben las 3 vidas

@@ -24,6 +24,11 @@ void Escena_Personajes(int NumPer) {
   personaje[1]= loadImage("alexander.png");
   personaje[2]= loadImage("sergio.png");
 
+
+  personaje[0]= loadImage("Jose.png");
+  personaje[1]= loadImage("Alexander.png");
+  personaje[2]= loadImage("Sergio.png");
+  
   animacion[0]=loadImage("josecorriendoderecha1.png");
   animacion[1]=loadImage("josecorriendoizquierda1.png");
   animacion[2]=loadImage("josesaltando1.png");
