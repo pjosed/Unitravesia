@@ -23,12 +23,21 @@ void iniciarMusicaJuego() {
 }
 
 void CoinRecogida() {
+<<<<<<< Updated upstream
   if (!CoinPlaying) {
     coin = new SoundFile(this, "SonidoCoin.mp3");
     coin.amp(0.3); // Volumen
     coin.rate(1); // Velocidad
     coin.play();
     CoinPlaying=true;
+=======
+  if(!CoinPlaying){
+ coin = new SoundFile(this, "SonidoCoin.mp3");
+ coin.amp(0.1); // Volumen
+ coin.rate(1); // Velocidad
+ coin.play();
+ CoinPlaying=true;
+>>>>>>> Stashed changes
   }
 }
 
