@@ -2,12 +2,6 @@ float suelo = 480; // Posición del suelo
 PImage CantAgua;
 
 
-//Obstaculos obstaculosEscena = new Obstaculos();
-
-
-
-
-
 class Escena_Juego { ////////////////////////////////////////////////////////////// Escena del videojuego
 
   PImage corazon;
@@ -141,7 +135,10 @@ class Escena_Juego { ///////////////////////////////////////////////////////////
         textSize(32);
         fill(255, 0, 0);
         text("¡GANASTE! :)", width/2 - 150, height/2);
-        noLoop();
+        text("Para reiniciar oprime R", width/2 - 150, suelo-30);
+        text("Para terminar oprime K", width/2 - 150, suelo);
+        Escena1=false;
+        Recovery = true;
        }
     }else{
       
@@ -276,7 +273,7 @@ print( TasaNuevosObstaculos);
     for (int i = obstaculos.size() - 1; i >= 0; i--) {
 
       if (this.obstaculos.get(i).golpeaJugador( xPersonaje, anchoPersonaje, yPersonaje, altoPersoanje, boleaColision)) {
-        // Si el perosonaje  choca con un , detener el juego
+        // Si el perosonaje  choca detener el juego
         return true;
       }
     }
@@ -324,7 +321,7 @@ class Iguana implements Obstaculo {
   int AnchoPopo = 30, AltoPopo=22;
 
 
-  // Constructor de la clase gato
+  // Constructor de la clase Iguana
   Iguana(float x, float y, float speed) {
     this.x = x;
     this.y = y;
@@ -600,7 +597,6 @@ class Coin {
 
   // Método para dibujar el agua en la pantalla
   void display() {
-
     image(ImgAgua, x, 480-altoCoin);
   }
 
