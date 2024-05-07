@@ -5,7 +5,7 @@ PImage piso;
 PImage []escenario = new PImage [4]; // posibles escenarios
 PImage menu[] = new PImage [5];
 int xmenu = 0, ymenu = 0; // Posicion en x y de la imagen menú
-boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false,Escenarios=false, Recovery=false;
+boolean Escena0 = true, Escena1 = false, Manual = false, Creditos = false, Personajes=false, Escena_MultiOnly=false, Escenarios=false, Recovery=false;
 boolean Creditos2=false;
 boolean izquierda = false, derecha = false;
 boolean confirmar_vida=false;
@@ -46,12 +46,11 @@ Escena_Juego E1 = new Escena_Juego();
 
 void setup() {
   size(1200, 600);
-PFont mono;
-mono = createFont("PoetsenOne-Regular.ttf", 38);
-textFont(mono);
+  PFont mono;
+  mono = createFont("PoetsenOne-Regular.ttf", 38);
+  textFont(mono);
 
-iniciarMusicaMenu();
-
+  iniciarMusicaMenu();
 }
 
 
@@ -59,60 +58,54 @@ iniciarMusicaMenu();
 void draw() {
 
   if (Escena0) { // Si está en el menú
-  if (!MusicaPlaying) {
+    if (!MusicaPlaying) {
       iniciarMusicaMenu();
     }
-    background(0,0,0);
+    background(0, 0, 0);
     Escena_Menu();
-    
-  
-  } else if (Escena1) { 
-  detenerMusicaMenu();
-  iniciarMusicaJuego();
-  PFont mono;
-  mono = createFont("PoetsenOne-Regular.ttf", 38);
-  textFont(mono);
-  
-  E1.draw(); 
-  
-  if(CoinRec){
-    CoinRecogida();
-    CoinRec=false;
-  }
-   if(ColisionRec){
-    ColisionSonido();
-    ColisionRec=false;
-  }
-  
+  } else if (Escena1) {
+    detenerMusicaMenu();
+    iniciarMusicaJuego();
+    PFont mono;
+    mono = createFont("PoetsenOne-Regular.ttf", 38);
+    textFont(mono);
 
+    E1.draw();
+
+    if (CoinRec) {
+      CoinRecogida();
+      CoinRec=false;
+    }
+    if (ColisionRec) {
+      ColisionSonido();
+      ColisionRec=false;
+    }
   } else if (Escenarios) {
     Elegir_Escenario();
-    
   } else if (Personajes) { // Si está en la seleccion del personaje
     Escena_Personajes(Seleccionados);
   } else if (Manual) { // Si se muestra el manual
     Escena_Manual();
   } else if (Creditos) { // Se muestran los creditos
     Escena_Creditos();
-  }else if (Creditos2) { // Se muestran los creditos
+  } else if (Creditos2) { // Se muestran los creditos
     Escena_Creditos2();
-  }else if (Escena_MultiOnly){
-  pregunta();
+  } else if (Escena_MultiOnly) {
+    pregunta();
   }
 }
 
 
 
 void mousePressed() {
-    println("X ES:", mouseX);
-    println("Y ES:", mouseY);
+  println("X ES:", mouseX);
+  println("Y ES:", mouseY);
 
   if (Escena0) { // Si está en la escena del menú
     if (mouseX > 0 && mouseX < 400 && mouseY > 0 && mouseY < 100) {
       Escena0 = false;
       Escenarios = true;
       click();
-      
     } else if (mouseX > 400 & mouseX < 800 && mouseY > 0 & mouseY < 100) {
       Escena0 = false;
       Manual = true;
@@ -123,38 +116,37 @@ void mousePressed() {
       click();
     }
   }
-  
-  
+
+
   if (Escenarios) { // SI ESTOY EN EL MENU ESCENARIOS
-   if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
+    if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Escenarios= false;
       Escena0=true;
       click();
-    }else if (mouseX>97 & mouseX<437 & mouseY>98 & mouseY<291) { // Escenario biblioteca
+    } else if (mouseX>97 & mouseX<437 & mouseY>98 & mouseY<291) { // Escenario biblioteca
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
       escprincipal= escenario[1];
       click();
-    }else if (mouseX>454 & mouseX<798 & mouseY>299 & mouseY<497) { // Escenario Casa estudio
+    } else if (mouseX>454 & mouseX<798 & mouseY>299 & mouseY<497) { // Escenario Casa estudio
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
       escprincipal= escenario[2];
       click();
-    }else if (mouseX>800 & mouseX<1147 & mouseY>98 & mouseY<297) { // Escenario Bloque J
+    } else if (mouseX>800 & mouseX<1147 & mouseY>98 & mouseY<297) { // Escenario Bloque J
       Escenarios= false;
       Escena_MultiOnly=true;
       //Personajes=true;
       escprincipal= escenario[3];
       click();
     }
-  
   }
-  
-  
+
+
   if (Personajes) { // SI ESTOY SELECCIONANDO PERSONAJES
- 
+
     if (mouseX>34 & mouseX<124 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE JOSE
       pprincipal.add(personaje[0]);
       Seleccionados +=1;
@@ -163,7 +155,6 @@ void mousePressed() {
       pprincipal.add(personaje[1]);
       Seleccionados +=1;
       click();
-
     } else if (mouseX>806 & mouseX<918 & mouseY>50 & mouseY<290) { // SELECCIONAR PERSONAJE DE SERGIO
       pprincipal.add(personaje[2]);
       Seleccionados +=1;
@@ -173,11 +164,11 @@ void mousePressed() {
       Escena_MultiOnly=true;
       click();
     }
-    
-    if(CantJugadores==1 | CantJugadores==2){
-       jose="Jose";
-       alexander="Alexander";
-       sergio="Sergio";
+
+    if (CantJugadores==1 | CantJugadores==2) {
+      jose="Jose";
+      alexander="Alexander";
+      sergio="Sergio";
     }
     if (Seleccionados == CantJugadores) {
       Personajes= false;
@@ -185,7 +176,6 @@ void mousePressed() {
       E1.setEscenario(escprincipal);
       E1.setPersonaje(pprincipal);
     }
-    
   }
 
   if (Creditos) {
@@ -213,8 +203,8 @@ void mousePressed() {
       click();
     }
   }
-  
-  if(Creditos2){
+
+  if (Creditos2) {
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Creditos2= false;
       Creditos=true;
@@ -231,23 +221,21 @@ void mousePressed() {
       link("https://www.youtube.com/watch?v=do5DHs9VGSw");
     } else if (mouseX>811 & mouseX<1114 & mouseY>177 & mouseY<217) {
       link("https://www.pngwing.com/es/free-png-maupq");
-    } 
-    
+    }
   }
-   if(Manual){
+  if (Manual) {
     if (mouseX>1094 & mouseX<1157 & mouseY>10 & mouseY<61) { // VOY ATRAS
       Manual=false;
       Escena0=true;
       click();
     }
-    
   }
-  
- 
-  
-  
-  if(Escena_MultiOnly){ ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES 
-  
+
+
+
+
+  if (Escena_MultiOnly) { ////////////////////////////////////////////////////////////SI ESTOY SELECCIONANDO 1 O 2 JUGADORES
+
     if (mouseX>401 & mouseX<798 & mouseY>137 & mouseY<229) { //////////// 1 JUGADOR
       Escena_MultiOnly= false;
       Personajes=true;
@@ -263,38 +251,32 @@ void mousePressed() {
       Escenarios=true;
       click();
     }
-      
   }
-  
-
 }
 
 
 
 void keyPressed() {
-  
-   if (Escena1) {
-       E1.keyPressed();
-    }
-    
-   if (Recovery == true ){
-   if(keyCode == 'K' || keyCode == 'k'){
-   exit();
-   
-   }
-   
-      if(keyCode == 'R' || keyCode == 'r'){
-        background(0,0,0);
-      E1 = new Escena_Juego();
-       E1.setEscenario(escprincipal);
-       E1.setPersonaje(pprincipal);
-       Recovery = false;
-       Escena1=true;
-   }
-     
-   }
-    
+
+  if (Escena1) {
+    E1.keyPressed();
   }
+
+  if (Recovery == true ) {
+    if (keyCode == 'K' || keyCode == 'k') {
+      exit();
+    }
+
+    if (keyCode == 'R' || keyCode == 'r') {
+      background(0, 0, 0);
+      E1 = new Escena_Juego();
+      E1.setEscenario(escprincipal);
+      E1.setPersonaje(pprincipal);
+      Recovery = false;
+      Escena1=true;
+    }
+  }
+}
 
 
 
@@ -302,8 +284,8 @@ void keyPressed() {
 
 void keyReleased() {
   if (Escena1) {
-   if (Escena1) {
-       E1.keyReleased();
+    if (Escena1) {
+      E1.keyReleased();
     }
   }
 }

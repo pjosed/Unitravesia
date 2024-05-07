@@ -1,7 +1,7 @@
 void Escena_Personajes(int NumPer) {
-  
-  float suelo  = 300; // Posición del suelo 
-  
+
+  float suelo  = 300; // Posición del suelo
+
   cl1=cl1+10;
   cl2=cl2+10;
   cl3=cl3+10;
@@ -17,13 +17,13 @@ void Escena_Personajes(int NumPer) {
 
   fondo_menu=loadImage("azuldegradado.jpg");
   image(fondo_menu, 0, 0, width, height);
-  
+
   a= "Escoje el jugador "+(NumPer+1)+"! :)";
 
   personaje[0]= loadImage("jose.png");
   personaje[1]= loadImage("alexander.png");
   personaje[2]= loadImage("sergio.png");
-  
+
   animacion[0]=loadImage("josecorriendoderecha1.png");
   animacion[1]=loadImage("josecorriendoizquierda1.png");
   animacion[2]=loadImage("josesaltando1.png");
@@ -42,9 +42,8 @@ void Escena_Personajes(int NumPer) {
   atras = loadImage("atras.png");
   atras.resize(50, 50);
   image(atras, 1100, 10);
- 
+
   image(personaje[0], 0, 0);
   image(personaje[1], width/3, 0);
   image(personaje[2], width-width/3, 0);
-
 }
