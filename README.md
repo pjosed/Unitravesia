@@ -32,7 +32,7 @@ Un juego inspirado en la travesía diaria de los estudiantes de la Universidad d
 🐱 Gameplay — Gatos apareciendo en el camino
 
 :( Game over
-![Menú Principal](https://raw.githubusercontent.com/tu_usuario/tu_repo/main/assets/Unitr.jpg)
+![Menú Principal](https://raw.githubusercontent.com/pjosed/Unitravesia/main/assets/Unitr.jpg)
 
 
 🕹️ Cómo jugar
