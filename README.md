@@ -32,7 +32,7 @@ Un juego inspirado en la travesía diaria de los estudiantes de la Universidad d
 🐱 Gameplay — Gatos apareciendo en el camino
 
 :( Game over
-./assets/menu.png
+./assets/Unitr.jpg
 
 🕹️ Cómo jugar
 
