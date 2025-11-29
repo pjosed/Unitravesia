@@ -21,8 +21,6 @@ Un juego inspirado en la travesía diaria de los estudiantes de la Universidad d
 
 🖼️ Screenshots del juego
 
-(Cuando subas las imágenes, cámbialas por tus rutas reales, ejemplo ./assets/menu.png)
-
 🧭 Menú Principal
 
 🎮 Selección de jugadores (1 o 2)
@@ -32,6 +30,9 @@ Un juego inspirado en la travesía diaria de los estudiantes de la Universidad d
 💥 Gameplay — Esquivando popo de iguana
 
 🐱 Gameplay — Gatos apareciendo en el camino
+
+:( Game over
+./assets/menu.png
 
 🕹️ Cómo jugar
 
